@@ -1,0 +1,30 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-FPSGame.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\Module.FPSGame.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\FPSGame.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\FPSGameGameMode.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\OurGameplayTags.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\WeaponBase.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseAbilitySystemComponent.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseGameplayAbility.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\PlayerGameplayAbility.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseAnimInstance.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\MyBaseAnimInstance.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseCharacter.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\MyCharacter.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\StructTypes.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\MyEnhancedInputComponent.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseInteractionActor.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\NativeInteractionInterface.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseStartupData.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\PlayerBaseStartupData.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\MyHUD.cpp.obj"
+"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\Default.rc2.res"
+/OUT:"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\UnrealEditor-FPSGame.lib"

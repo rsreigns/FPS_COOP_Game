@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\unreal project\\fpsgame\\source\\fpsgame\\fpsgame.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\x64\\fpsgameeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fpsgame\\definitions.fpsgame.h",
+            "e:\\unreal project\\fpsgame\\source\\fpsgame\\fpsgame.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

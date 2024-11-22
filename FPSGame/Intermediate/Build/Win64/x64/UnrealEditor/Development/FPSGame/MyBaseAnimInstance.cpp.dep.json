@@ -1,0 +1,33 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\unreal project\\fpsgame\\source\\fpsgame\\private\\animation\\mybaseaniminstance.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\x64\\fpsgameeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fpsgame\\definitions.fpsgame.h",
+            "e:\\unreal project\\fpsgame\\source\\fpsgame\\public\\animation\\mybaseaniminstance.h",
+            "e:\\unreal project\\fpsgame\\source\\fpsgame\\public\\animation\\baseaniminstance.h",
+            "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\baseaniminstance.generated.h",
+            "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\mybaseaniminstance.generated.h",
+            "e:\\unreal project\\fpsgame\\source\\fpsgame\\public\\character\\mycharacter.h",
+            "e:\\unreal project\\fpsgame\\source\\fpsgame\\public\\character\\basecharacter.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\abilitysysteminterface.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\plugins\\runtime\\gameplayabilities\\intermediate\\build\\win64\\unrealeditor\\inc\\gameplayabilities\\uht\\abilitysysteminterface.generated.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\source\\runtime\\experimental\\iris\\core\\public\\iris\\serialization\\irisobjectreferencepackagemap.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\iriscore\\uht\\irisobjectreferencepackagemap.generated.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementreplication.generated.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
+            "e:\\ue 5.4\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
+            "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\basecharacter.generated.h",
+            "e:\\unreal project\\fpsgame\\source\\fpsgame\\public\\interactionsystem\\nativeinteractioninterface.h",
+            "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\nativeinteractioninterface.generated.h",
+            "e:\\unreal project\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\mycharacter.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

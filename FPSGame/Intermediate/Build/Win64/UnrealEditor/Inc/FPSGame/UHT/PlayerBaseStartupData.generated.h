@@ -1,0 +1,56 @@
+// Copyright Epic Games, Inc. All Rights Reserved.
+/*===========================================================================
+	Generated code exported from UnrealHeaderTool.
+	DO NOT modify this manually! Edit the corresponding .h files instead!
+===========================================================================*/
+
+// IWYU pragma: private, include "StartupData/PlayerBaseStartupData.h"
+#include "UObject/ObjectMacros.h"
+#include "UObject/ScriptMacros.h"
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+#ifdef FPSGAME_PlayerBaseStartupData_generated_h
+#error "PlayerBaseStartupData.generated.h already included, missing '#pragma once' in PlayerBaseStartupData.h"
+#endif
+#define FPSGAME_PlayerBaseStartupData_generated_h
+
+#define FID_unreal_project_FPSGame_Source_FPSGame_Public_StartupData_PlayerBaseStartupData_h_17_INCLASS_NO_PURE_DECLS \
+private: \
+	static void StaticRegisterNativesUPlayerBaseStartupData(); \
+	friend struct Z_Construct_UClass_UPlayerBaseStartupData_Statics; \
+public: \
+	DECLARE_CLASS(UPlayerBaseStartupData, UBaseStartupData, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/FPSGame"), NO_API) \
+	DECLARE_SERIALIZER(UPlayerBaseStartupData)
+
+
+#define FID_unreal_project_FPSGame_Source_FPSGame_Public_StartupData_PlayerBaseStartupData_h_17_ENHANCED_CONSTRUCTORS \
+	/** Standard constructor, called after all reflected properties have been initialized */ \
+	NO_API UPlayerBaseStartupData(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	UPlayerBaseStartupData(UPlayerBaseStartupData&&); \
+	UPlayerBaseStartupData(const UPlayerBaseStartupData&); \
+public: \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UPlayerBaseStartupData); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UPlayerBaseStartupData); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UPlayerBaseStartupData) \
+	NO_API virtual ~UPlayerBaseStartupData();
+
+
+#define FID_unreal_project_FPSGame_Source_FPSGame_Public_StartupData_PlayerBaseStartupData_h_14_PROLOG
+#define FID_unreal_project_FPSGame_Source_FPSGame_Public_StartupData_PlayerBaseStartupData_h_17_GENERATED_BODY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_unreal_project_FPSGame_Source_FPSGame_Public_StartupData_PlayerBaseStartupData_h_17_INCLASS_NO_PURE_DECLS \
+	FID_unreal_project_FPSGame_Source_FPSGame_Public_StartupData_PlayerBaseStartupData_h_17_ENHANCED_CONSTRUCTORS \
+private: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+template<> FPSGAME_API UClass* StaticClass<class UPlayerBaseStartupData>();
+
+#undef CURRENT_FILE_ID
+#define CURRENT_FILE_ID FID_unreal_project_FPSGame_Source_FPSGame_Public_StartupData_PlayerBaseStartupData_h
+
+
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
