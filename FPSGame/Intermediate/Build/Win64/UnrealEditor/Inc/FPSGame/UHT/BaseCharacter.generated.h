@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define FPSGAME_BaseCharacter_generated_h
 
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_INCLASS_NO_PURE_DECLS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesABaseCharacter(); \
 	friend struct Z_Construct_UClass_ABaseCharacter_Statics; \
@@ -24,7 +24,7 @@ public: \
 	virtual UObject* _getUObject() const override { return const_cast<ABaseCharacter*>(this); }
 
 
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_ENHANCED_CONSTRUCTORS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	ABaseCharacter(ABaseCharacter&&); \
@@ -36,12 +36,12 @@ public: \
 	NO_API virtual ~ABaseCharacter();
 
 
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_13_PROLOG
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_GENERATED_BODY \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_13_PROLOG
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_unreal_project_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_INCLASS_NO_PURE_DECLS \
-	FID_unreal_project_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_ENHANCED_CONSTRUCTORS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_INCLASS_NO_PURE_DECLS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -49,7 +49,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> FPSGAME_API UClass* StaticClass<class ABaseCharacter>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_unreal_project_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h
+#define CURRENT_FILE_ID FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_BaseCharacter_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

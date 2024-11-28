@@ -22,12 +22,13 @@ struct FPSGameGameMode_eventBroadcastGravityChange_Parms
 {
 	FVector NewGravityDirection;
 };
-static FName NAME_AFPSGameGameMode_BroadcastGravityChange = FName(TEXT("BroadcastGravityChange"));
+static const FName NAME_AFPSGameGameMode_BroadcastGravityChange = FName(TEXT("BroadcastGravityChange"));
 void AFPSGameGameMode::BroadcastGravityChange(FVector NewGravityDirection)
 {
 	FPSGameGameMode_eventBroadcastGravityChange_Parms Parms;
 	Parms.NewGravityDirection=NewGravityDirection;
-	ProcessEvent(FindFunctionChecked(NAME_AFPSGameGameMode_BroadcastGravityChange),&Parms);
+	UFunction* Func = FindFunctionChecked(NAME_AFPSGameGameMode_BroadcastGravityChange);
+	ProcessEvent(Func,&Parms);
 }
 struct Z_Construct_UFunction_AFPSGameGameMode_BroadcastGravityChange_Statics
 {
@@ -137,14 +138,14 @@ AFPSGameGameMode::~AFPSGameGameMode() {}
 // End Class AFPSGameGameMode
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_FPSGameGameMode_h_Statics
+struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_FPSGameGameMode_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFPSGameGameMode, AFPSGameGameMode::StaticClass, TEXT("AFPSGameGameMode"), &Z_Registration_Info_UClass_AFPSGameGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFPSGameGameMode), 1607898918U) },
+		{ Z_Construct_UClass_AFPSGameGameMode, AFPSGameGameMode::StaticClass, TEXT("AFPSGameGameMode"), &Z_Registration_Info_UClass_AFPSGameGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFPSGameGameMode), 699552720U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_FPSGameGameMode_h_1887476641(TEXT("/Script/FPSGame"),
-	Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_FPSGameGameMode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_FPSGameGameMode_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_FPSGameGameMode_h_3150736697(TEXT("/Script/FPSGame"),
+	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_FPSGameGameMode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_FPSGameGameMode_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

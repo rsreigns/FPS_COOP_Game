@@ -95,14 +95,14 @@ AMyHUD::~AMyHUD() {}
 // End Class AMyHUD
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_Statics
+struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AMyHUD, AMyHUD::StaticClass, TEXT("AMyHUD"), &Z_Registration_Info_UClass_AMyHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyHUD), 3377232593U) },
+		{ Z_Construct_UClass_AMyHUD, AMyHUD::StaticClass, TEXT("AMyHUD"), &Z_Registration_Info_UClass_AMyHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyHUD), 3435827538U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_1096340330(TEXT("/Script/FPSGame"),
-	Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_2452673707(TEXT("/Script/FPSGame"),
+	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_UI_MyHUD_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

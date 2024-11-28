@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define FPSGAME_StructTypes_generated_h
 
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Data_StructTypes_h_19_GENERATED_BODY \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Data_StructTypes_h_19_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FInputAbilityTagMapping_Statics; \
 	FPSGAME_API static class UScriptStruct* StaticStruct();
 
@@ -22,7 +22,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 template<> FPSGAME_API UScriptStruct* StaticStruct<struct FInputAbilityTagMapping>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_unreal_project_FPSGame_Source_FPSGame_Public_Data_StructTypes_h
+#define CURRENT_FILE_ID FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Data_StructTypes_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

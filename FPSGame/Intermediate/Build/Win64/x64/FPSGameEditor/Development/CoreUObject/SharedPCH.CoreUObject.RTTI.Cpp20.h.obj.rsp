@@ -1,4 +1,4 @@
-"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.cpp"
+"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.cpp"
 /I "."
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\UHT"
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\VerseVMBytecode"
@@ -7,16 +7,21 @@
 /I "Runtime\Core\Public"
 /I "Runtime\Core\Internal"
 /I "Runtime\TraceLog\Public"
+/I "Runtime\CorePreciseFP\Public"
+/I "Runtime\CorePreciseFP\Internal"
 /external:W0
-/external:I "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\INCLUDE"
-/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt"
-/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared"
-/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um"
-/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\winrt"
-/Yc"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h"
-/Fp"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h.pch"
-/Fo"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h.obj"
-/sourceDependencies "E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h.dep.json"
+/external:I "ThirdParty\GuidelinesSupportLibrary\GSL-1144\include"
+/external:I "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\INCLUDE"
+/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt"
+/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
+/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
+/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
+/Yc"SharedPCH.CoreUObject.RTTI.Cpp20.h"
+/Fp"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h.pch"
+/Fo"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h.obj"
+/experimental:log "E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h.sarif"
+/sourceDependencies "E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\CoreUObject\SharedPCH.CoreUObject.RTTI.Cpp20.h.dep.json"
+/d2ssa-cfg-question-
 /Zc:inline
 /nologo
 /Oi

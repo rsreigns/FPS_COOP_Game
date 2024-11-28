@@ -1,0 +1,20 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\myhud.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\x64\\fpsgameeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderunreal5_4.h.pch",
+        "Includes": [
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fpsgame\\definitions.fpsgame.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\public\\ui\\myhud.h",
+            "e:\\ue-5.5\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\gameframework\\hud.h",
+            "e:\\ue-5.5\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\gameframework\\hudhitbox.h",
+            "e:\\ue-5.5\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\gameframework\\debugtextinfo.h",
+            "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\debugtextinfo.generated.h",
+            "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\hud.generated.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\myhud.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

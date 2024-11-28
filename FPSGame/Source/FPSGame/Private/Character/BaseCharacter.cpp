@@ -3,6 +3,7 @@
 
 #include "Character/BaseCharacter.h"
 #include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "FPSGame/DebugHelper.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 ABaseCharacter::ABaseCharacter()
@@ -15,7 +16,7 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	DEBUG::PrintString("Test String in beginplay Base Character");
 }
 
 void ABaseCharacter::PossessedBy(AController* NewController)

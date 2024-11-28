@@ -22,10 +22,11 @@ UPackage* Z_Construct_UPackage__Script_FPSGame();
 // End Cross Module References
 
 // Begin Class AWeaponBase Function HandleFire
-static FName NAME_AWeaponBase_HandleFire = FName(TEXT("HandleFire"));
+static const FName NAME_AWeaponBase_HandleFire = FName(TEXT("HandleFire"));
 void AWeaponBase::HandleFire()
 {
-	ProcessEvent(FindFunctionChecked(NAME_AWeaponBase_HandleFire),NULL);
+	UFunction* Func = FindFunctionChecked(NAME_AWeaponBase_HandleFire);
+	ProcessEvent(Func,NULL);
 }
 struct Z_Construct_UFunction_AWeaponBase_HandleFire_Statics
 {
@@ -191,14 +192,14 @@ AWeaponBase::~AWeaponBase() {}
 // End Class AWeaponBase
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_WeaponBase_h_Statics
+struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_WeaponBase_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AWeaponBase, AWeaponBase::StaticClass, TEXT("AWeaponBase"), &Z_Registration_Info_UClass_AWeaponBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeaponBase), 2530409917U) },
+		{ Z_Construct_UClass_AWeaponBase, AWeaponBase::StaticClass, TEXT("AWeaponBase"), &Z_Registration_Info_UClass_AWeaponBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeaponBase), 3234973858U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_WeaponBase_h_3872635414(TEXT("/Script/FPSGame"),
-	Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_WeaponBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_WeaponBase_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_WeaponBase_h_3595735917(TEXT("/Script/FPSGame"),
+	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_WeaponBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_WeaponBase_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

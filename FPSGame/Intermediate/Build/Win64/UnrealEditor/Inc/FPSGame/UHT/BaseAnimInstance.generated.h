@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define FPSGAME_BaseAnimInstance_generated_h
 
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUBaseAnimInstance(); \
 	friend struct Z_Construct_UClass_UBaseAnimInstance_Statics; \
@@ -23,7 +23,7 @@ public: \
 	DECLARE_SERIALIZER(UBaseAnimInstance)
 
 
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UBaseAnimInstance(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
@@ -37,12 +37,12 @@ public: \
 	NO_API virtual ~UBaseAnimInstance();
 
 
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_12_PROLOG
-#define FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_GENERATED_BODY \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_12_PROLOG
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_INCLASS_NO_PURE_DECLS \
-	FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_ENHANCED_CONSTRUCTORS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_INCLASS_NO_PURE_DECLS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -50,7 +50,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> FPSGAME_API UClass* StaticClass<class UBaseAnimInstance>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h
+#define CURRENT_FILE_ID FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_BaseAnimInstance_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -1,11 +1,13 @@
-"E:\unreal project\FPSGame\Source\FPSGame\Private\Character\BaseCharacter.cpp"
-/FI"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/FI"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\Definitions.FPSGame.h"
-/Yu"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/Fp"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
-/Fo"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseCharacter.cpp.obj"
-/sourceDependencies "E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseCharacter.cpp.dep.json"
-@"E:\unreal project\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\FPSGame.Shared.rsp"
+"E:\unreal project\FPS_COOP_Game\FPSGame\Source\FPSGame\Private\Character\BaseCharacter.cpp"
+/FI"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.InclOrderUnreal5_4.h"
+/FI"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\Definitions.FPSGame.h"
+/Yu"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.InclOrderUnreal5_4.h"
+/Fp"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\FPSGameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.InclOrderUnreal5_4.h.pch"
+/Fo"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseCharacter.cpp.obj"
+/experimental:log "E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseCharacter.cpp.sarif"
+/sourceDependencies "E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\BaseCharacter.cpp.dep.json"
+@"E:\unreal project\FPS_COOP_Game\FPSGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\FPSGame\FPSGame.Shared.rsp"
+/d2ssa-cfg-question-
 /Zc:inline
 /nologo
 /Oi

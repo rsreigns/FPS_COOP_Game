@@ -13,6 +13,7 @@
     </None>
     <None Include="..\..\.vsconfig" />
     <None Include="..\..\UpgradeLog.htm" />
+    <None Include="..\..\UpgradeLog2.htm" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -34,24 +35,24 @@
     <Filter Include="Source\FPSGame">
       <UniqueIdentifier>{C184ABA4-8055-35C1-A7F2-55D42CE53013}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\DebugHelper.h">
+    <ClCompile Include="..\..\Source\FPSGame\DebugHelper.h">
       <Filter>Source\FPSGame</Filter>
-    </ClInclude>
+    </ClCompile>
     <None Include="..\..\Source\FPSGame\FPSGame.Build.cs">
       <Filter>Source\FPSGame</Filter>
     </None>
     <ClCompile Include="..\..\Source\FPSGame\FPSGame.cpp">
       <Filter>Source\FPSGame</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FPSGame\FPSGame.h">
+    <ClCompile Include="..\..\Source\FPSGame\FPSGame.h">
       <Filter>Source\FPSGame</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\FPSGameGameMode.cpp">
       <Filter>Source\FPSGame</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FPSGame\FPSGameGameMode.h">
+    <ClCompile Include="..\..\Source\FPSGame\FPSGameGameMode.h">
       <Filter>Source\FPSGame</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Private">
       <UniqueIdentifier>{8C076378-72A9-37D4-9694-E0F73BBEB760}</UniqueIdentifier>
     </Filter>
@@ -133,80 +134,80 @@
     <Filter Include="Source\FPSGame\Public">
       <UniqueIdentifier>{DF6A9987-3503-33D0-8038-411697992443}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\OurGameplayTags.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\OurGameplayTags.h">
       <Filter>Source\FPSGame\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSGame\Public\WeaponBase.h">
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\WeaponBase.h">
       <Filter>Source\FPSGame\Public</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\AbilitySystem">
       <UniqueIdentifier>{EC7A8DC1-F641-3197-8DEF-B6F9B93F7B21}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\AbilitySystem\BaseAbilitySystemComponent.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\AbilitySystem\BaseAbilitySystemComponent.h">
       <Filter>Source\FPSGame\Public\AbilitySystem</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\AbilitySystem\Abilities">
       <UniqueIdentifier>{13D20077-7028-3DC3-A176-CD6154D0F00B}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\AbilitySystem\Abilities\BaseGameplayAbility.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\AbilitySystem\Abilities\BaseGameplayAbility.h">
       <Filter>Source\FPSGame\Public\AbilitySystem\Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSGame\Public\AbilitySystem\Abilities\PlayerGameplayAbility.h">
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\AbilitySystem\Abilities\PlayerGameplayAbility.h">
       <Filter>Source\FPSGame\Public\AbilitySystem\Abilities</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\Animation">
       <UniqueIdentifier>{BC6CC832-B51E-3F43-B8B9-180BEF52EBA2}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\Animation\BaseAnimInstance.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\Animation\BaseAnimInstance.h">
       <Filter>Source\FPSGame\Public\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSGame\Public\Animation\MyBaseAnimInstance.h">
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Animation\MyBaseAnimInstance.h">
       <Filter>Source\FPSGame\Public\Animation</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\Character">
       <UniqueIdentifier>{76DF58EC-B544-3F99-8C98-7670191A0CDD}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\Character\BaseCharacter.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\Character\BaseCharacter.h">
       <Filter>Source\FPSGame\Public\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSGame\Public\Character\MyCharacter.h">
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Character\MyCharacter.h">
       <Filter>Source\FPSGame\Public\Character</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\Data">
       <UniqueIdentifier>{3E17F8DC-E6A9-3558-A89C-129F9315738F}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\Data\StructTypes.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\Data\StructTypes.h">
       <Filter>Source\FPSGame\Public\Data</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\Input">
       <UniqueIdentifier>{6E909801-A1E1-381A-8668-EAAF7AFB3587}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\Input\MyEnhancedInputComponent.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\Input\MyEnhancedInputComponent.h">
       <Filter>Source\FPSGame\Public\Input</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\InteractionSystem">
       <UniqueIdentifier>{461A7DD8-817A-321D-AB90-B70046C94720}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\InteractionSystem\BaseInteractionActor.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\InteractionSystem\BaseInteractionActor.h">
       <Filter>Source\FPSGame\Public\InteractionSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSGame\Public\InteractionSystem\NativeInteractionInterface.h">
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\InteractionSystem\NativeInteractionInterface.h">
       <Filter>Source\FPSGame\Public\InteractionSystem</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\StartupData">
       <UniqueIdentifier>{37DFA53E-4CED-39E8-91FD-8D62CAD38A79}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\StartupData\BaseStartupData.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\StartupData\BaseStartupData.h">
       <Filter>Source\FPSGame\Public\StartupData</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSGame\Public\StartupData\PlayerBaseStartupData.h">
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\StartupData\PlayerBaseStartupData.h">
       <Filter>Source\FPSGame\Public\StartupData</Filter>
-    </ClInclude>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\UI">
       <UniqueIdentifier>{CEF9DAAF-A765-35EE-B4A1-E26DFB2A7D70}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSGame\Public\UI\MyHUD.h">
+    <ClCompile Include="..\..\Source\FPSGame\Public\UI\MyHUD.h">
       <Filter>Source\FPSGame\Public\UI</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
 </Project>

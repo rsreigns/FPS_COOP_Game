@@ -1,0 +1,43 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.FPSGame.cpp.obj": [
+			"FPSGame.cpp.obj",
+			"FPSGameGameMode.cpp.obj",
+			"BaseGameplayAbility.cpp.obj",
+			"PlayerGameplayAbility.cpp.obj",
+			"BaseAbilitySystemComponent.cpp.obj",
+			"BaseAnimInstance.cpp.obj",
+			"MyBaseAnimInstance.cpp.obj",
+			"BaseCharacter.cpp.obj",
+			"MyCharacter.cpp.obj",
+			"StructTypes.cpp.obj",
+			"MyEnhancedInputComponent.cpp.obj",
+			"BaseInteractionActor.cpp.obj",
+			"NativeInteractionInterface.cpp.obj",
+			"OurGameplayTags.cpp.obj",
+			"BaseStartupData.cpp.obj",
+			"PlayerBaseStartupData.cpp.obj",
+			"MyHUD.cpp.obj",
+			"WeaponBase.cpp.obj",
+			"BaseAbilitySystemComponent.gen.cpp.obj",
+			"BaseAnimInstance.gen.cpp.obj",
+			"BaseCharacter.gen.cpp.obj",
+			"BaseGameplayAbility.gen.cpp.obj",
+			"BaseInteractionActor.gen.cpp.obj",
+			"BaseStartupData.gen.cpp.obj",
+			"FPSGame.init.gen.cpp.obj",
+			"FPSGameGameMode.gen.cpp.obj",
+			"MyBaseAnimInstance.gen.cpp.obj",
+			"MyCharacter.gen.cpp.obj",
+			"MyEnhancedInputComponent.gen.cpp.obj",
+			"MyHUD.gen.cpp.obj",
+			"NativeInteractionInterface.gen.cpp.obj",
+			"PlayerBaseStartupData.gen.cpp.obj",
+			"PlayerGameplayAbility.gen.cpp.obj",
+			"StructTypes.gen.cpp.obj",
+			"WeaponBase.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj"
+		]
+	}
+}

@@ -119,14 +119,14 @@ UMyBaseAnimInstance::~UMyBaseAnimInstance() {}
 // End Class UMyBaseAnimInstance
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics
+struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UMyBaseAnimInstance, UMyBaseAnimInstance::StaticClass, TEXT("UMyBaseAnimInstance"), &Z_Registration_Info_UClass_UMyBaseAnimInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyBaseAnimInstance), 713565299U) },
+		{ Z_Construct_UClass_UMyBaseAnimInstance, UMyBaseAnimInstance::StaticClass, TEXT("UMyBaseAnimInstance"), &Z_Registration_Info_UClass_UMyBaseAnimInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyBaseAnimInstance), 3163355911U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_3183656781(TEXT("/Script/FPSGame"),
-	Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_554727141(TEXT("/Script/FPSGame"),
+	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration
