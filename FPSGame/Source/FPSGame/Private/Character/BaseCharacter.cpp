@@ -16,7 +16,6 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	DEBUG::PrintString("Test String in beginplay Base Character");
 }
 
 void ABaseCharacter::PossessedBy(AController* NewController)

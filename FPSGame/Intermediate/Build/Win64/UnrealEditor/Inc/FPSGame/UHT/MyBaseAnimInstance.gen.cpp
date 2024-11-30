@@ -12,7 +12,6 @@ void EmptyLinkFunctionForGeneratedCodeMyBaseAnimInstance() {}
 
 // Begin Cross Module References
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
-COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTransform();
 FPSGAME_API UClass* Z_Construct_UClass_AMyCharacter_NoRegister();
 FPSGAME_API UClass* Z_Construct_UClass_UBaseAnimInstance();
 FPSGAME_API UClass* Z_Construct_UClass_UMyBaseAnimInstance();
@@ -49,16 +48,11 @@ struct Z_Construct_UClass_UMyBaseAnimInstance_Statics
 		{ "Category", "Animation|Player" },
 		{ "ModuleRelativePath", "Public/Animation/MyBaseAnimInstance.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LHIKTransform_MetaData[] = {
-		{ "Category", "Animation|Player" },
-		{ "ModuleRelativePath", "Public/Animation/MyBaseAnimInstance.h" },
-	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PlayerOwningCharacter;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_DeltaRot;
 	static void NewProp_bIsPlayerADS_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsPlayerADS;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_LHIKTransform;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -73,12 +67,10 @@ void Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_bIsPlayerADS_SetBit
 	((UMyBaseAnimInstance*)Obj)->bIsPlayerADS = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_bIsPlayerADS = { "bIsPlayerADS", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UMyBaseAnimInstance), &Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_bIsPlayerADS_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsPlayerADS_MetaData), NewProp_bIsPlayerADS_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_LHIKTransform = { "LHIKTransform", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UMyBaseAnimInstance, LHIKTransform), Z_Construct_UScriptStruct_FTransform, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LHIKTransform_MetaData), NewProp_LHIKTransform_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMyBaseAnimInstance_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_PlayerOwningCharacter,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_DeltaRot,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_bIsPlayerADS,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyBaseAnimInstance_Statics::NewProp_LHIKTransform,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UMyBaseAnimInstance_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UMyBaseAnimInstance_Statics::DependentSingletons[])() = {
@@ -122,10 +114,10 @@ UMyBaseAnimInstance::~UMyBaseAnimInstance() {}
 struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UMyBaseAnimInstance, UMyBaseAnimInstance::StaticClass, TEXT("UMyBaseAnimInstance"), &Z_Registration_Info_UClass_UMyBaseAnimInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyBaseAnimInstance), 3163355911U) },
+		{ Z_Construct_UClass_UMyBaseAnimInstance, UMyBaseAnimInstance::StaticClass, TEXT("UMyBaseAnimInstance"), &Z_Registration_Info_UClass_UMyBaseAnimInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyBaseAnimInstance), 1615512935U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_554727141(TEXT("/Script/FPSGame"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_3044535605(TEXT("/Script/FPSGame"),
 	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Animation_MyBaseAnimInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

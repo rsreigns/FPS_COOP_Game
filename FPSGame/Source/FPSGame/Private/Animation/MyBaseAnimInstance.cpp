@@ -20,7 +20,7 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 	{
 		DeltaRot = PlayerOwningCharacter->DeltaRotation ;
 		bIsPlayerADS = PlayerOwningCharacter->bIsADS;
-		LHIKTransform = PlayerOwningCharacter->GetLeftHandIK();
+
 	}
 
 }

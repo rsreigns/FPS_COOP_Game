@@ -8,6 +8,8 @@
 
 #include "FPSGame/DebugHelper.h"
 #include "DrawDebugHelpers.h"
+#include "Actors/ProjectileBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AWeaponBase::AWeaponBase()
@@ -29,45 +31,175 @@ void AWeaponBase::BeginPlay()
 			PlayerCamera = OwningPlayer->GetCameraComponent();
 		}
 	}
+	CurrentAmmo = MaxAmmo;
 }
 
+void AWeaponBase::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	if (bIsResettingRecoilRotation)
+	{
+		FRotator CurrentRotation = OwningPlayer->GetControlRotation();
+		FRotator NewRotation = FMath::RInterpTo(CurrentRotation, PreRecoilRotation, DeltaSeconds,2.f);
+
+		DEBUG::PrintString(FString::Printf(TEXT("Rotation Pitch and Yaw : %f and  %f"),NewRotation.Pitch,NewRotation.Yaw));
+		OwningPlayer->GetController()->SetControlRotation(NewRotation);
+		float Tolerance = 0.1f;
+		if (FMath::Abs(CurrentRotation.Pitch - PreRecoilRotation.Pitch) <= Tolerance &&
+			FMath::Abs(CurrentRotation.Yaw - PreRecoilRotation.Yaw) <= Tolerance &&
+			FMath::Abs(CurrentRotation.Roll - PreRecoilRotation.Roll) <= Tolerance)
+		{
+			bIsResettingRecoilRotation = false;
+		}
+	}
+}
 
 
 void AWeaponBase::StartFireEvent()
 {
+	//clear timer for recoil reset rotation
+	bIsResettingRecoilRotation = false;
+	PreRecoilRotation = OwningPlayer->GetControlRotation();
+	if (GetIsReloading()) return;
+	
 	FirstFireDelay = FMath::Max(LastFiredTime + FireRate - GetWorld()->TimeSeconds, 0.f);
-	GetWorldTimerManager().SetTimer(FireTimerHandle, this, &ThisClass::HandleFire, FireRate, !bIsSingleFireWeapon, FirstFireDelay);
+	
+	bool bShouldLoop = WeaponFiringMode == EWeaponFiringMode::Automatic? true:false;
+	BulletsFired = 0;
+	GetWorldTimerManager().SetTimer(FireTimerHandle, this, &ThisClass::HandleFire,
+		FireRate,bShouldLoop, FirstFireDelay);
+	
 }
 
 void AWeaponBase::StopFireEvent()
 {
 	GetWorldTimerManager().ClearTimer(FireTimerHandle);
 	FireTimerHandle.Invalidate();
+
+	bIsResettingRecoilRotation = true;
 }
 
+
+bool AWeaponBase::GetIsReloading()
+{
+	if (CurrentAmmo <= 0)
+	{
+		if (!GetWorldTimerManager().IsTimerActive(ReloadTimerHandle))
+		{
+			DEBUG::PrintString("Reloading");
+			GetWorldTimerManager().SetTimer(ReloadTimerHandle,this,&ThisClass::ReloadWeapon,ReloadTime);
+		}
+		return true;
+	}
+	return false;
+}
+
+
+void AWeaponBase::ReloadWeapon_Implementation()
+{
+	CurrentAmmo = MaxAmmo;
+	BulletsFired =0;
+	DEBUG::PrintString("Weapon Reloaded");
+}
 
 void AWeaponBase::HandleFire_Implementation()
 {
-	// aim from camera and ironsight, line trace visible from muzzle
-
-	//ADSLocation = WeaponMesh->GetSocketLocation("ADS");
-	//IronSightLocation = WeaponMesh->GetSocketLocation("IronSight");
-
-	//FVector Direction = (IronSightLocation - ADSLocation);
-	//FVector ForwardDirection = Direction.GetSafeNormal();
+	if (GetIsReloading())
+	{
+		StopFireEvent();
+		return;
+	}
 	
-	//FVector StartPoint = ADSLocation + ForwardDirection * 20.f;
-	//FVector EndPoint = StartPoint + ForwardDirection * TraceDistance;
+	DEBUG::PrintString(FString::Printf(TEXT("Current Ammo: %d"), CurrentAmmo),1.f,FColor::Magenta);
+	
+
+	LastFiredTime = GetWorld()->TimeSeconds;
+	
+	
+	if (WeaponFiringMode != EWeaponFiringMode::Burst)
+	{
+		CurrentAmmo-=1;
+		HandleWeaponProjectile();
+	}
+	else
+	{
+		GetWorldTimerManager().SetTimer(BurstFireHandle,this,&ThisClass::HandleBurstFire,
+		BurstFireDelay,true,0.f);
+	}
+	
+
+}
+void AWeaponBase::HandleBurstFire()
+{
+	if (BurstBulletCounter == BurstFireBulletCount)
+	{
+		BurstBulletCounter = 0;
+		GetWorldTimerManager().ClearTimer(BurstFireHandle);
+		BurstFireHandle.Invalidate();
+		return;
+	}
+	CurrentAmmo-=1;
+	BurstBulletCounter+=1;
+	HandleWeaponProjectile();
+}
+void AWeaponBase::HandleWeaponProjectile()
+{
 	if(!PlayerCamera) return;
+
 	MuzzleLocation = WeaponMesh->GetSocketLocation("Muzzle"); 
 	FVector StartPoint = PlayerCamera->GetComponentLocation();
-	FVector EndPoint = StartPoint + PlayerCamera->GetForwardVector() * 4000.f;
-	LastFiredTime = GetWorld()->TimeSeconds;
-	//FHitResult OutHit = DoLineTraceByObject(StartPoint, EndPoint,true);
-	//FVector HitPoint = OutHit.Location == FVector::ZeroVector ? OutHit.TraceEnd : OutHit.Location;
-	FHitResult RealHit = DoLineTraceByObject(MuzzleLocation, EndPoint, true,true);
+	FVector EndPoint = StartPoint + PlayerCamera->GetForwardVector() * FireDistance;
+	if (WeaponFireType == EWeaponFireType::Trace)
+	{
+		OutHit = DoLineTraceByObject(MuzzleLocation, EndPoint, true,true);
+		HandleHitDetection();
+	}
+	else if (WeaponFireType == EWeaponFireType::Projectile)
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = GetOwner();
+		SpawnParams.Instigator = GetOwner()->GetInstigator();
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		const FTransform ProjectileTransform = FTransform(PlayerCamera->GetComponentRotation(),MuzzleLocation);
+		AActor* Projectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, ProjectileTransform, SpawnParams);
+	}
+	HandleRecoil();
 }
 
+void AWeaponBase::HandleRecoil()
+{
+	// random value of pitch yaw that gets added
+	BulletsFired +=1;
+	float InYaw = FMath::RandRange(RecoilYaw.X,RecoilYaw.Y);
+	float InPitch = FMath::RandRange(RecoilPitch.X,RecoilPitch.Y)
+	* FMath::GetMappedRangeValueClamped
+	(FVector2D(0,MaxAmmo-CurrentAmmo),FVector2D(0,MaxPitchMultiplier),BulletsFired);
+	
+	// on stop fire event, reset rotation with interpolation based on number of bullets fired
+	
+	OwningPlayer->AddControllerYawInput(InYaw);
+	OwningPlayer->AddControllerPitchInput(-InPitch);
+}
+
+
+void AWeaponBase::HandleHitDetection()
+{
+	if (WeaponFireType == EWeaponFireType::Projectile) return;
+	if (AActor* HitActor = OutHit.GetActor())
+	{
+		float NewDamage = WeaponDamage;
+		APawn* HitPawn = Cast<APawn>(HitActor);
+		if (HitPawn)
+		{
+			if (OutHit.BoneName == FName("head"))
+			{
+				NewDamage*= CriticalDamageMultiplier;
+			}
+		}
+		UGameplayStatics::ApplyDamage(HitActor,NewDamage,
+	GetOwner()->GetInstigatorController(),GetOwner(),DamageTypeClass);
+	}
+}
 FHitResult AWeaponBase::DoLineTraceByObject(FVector Start, FVector End, bool ShowDebug, bool ForDuration, float Duration)
 {
 	EDrawDebugTrace::Type DebugType = EDrawDebugTrace::None;
@@ -79,9 +211,9 @@ FHitResult AWeaponBase::DoLineTraceByObject(FVector Start, FVector End, bool Sho
 			DebugType = EDrawDebugTrace::ForDuration;
 		}
 	}
-	FHitResult OutHit;
+	FHitResult Hit;
 	UKismetSystemLibrary::LineTraceSingleForObjects
 	(this, Start, End, TraceObjectTypes, false, TArray<AActor*>(), DebugType, OutHit, true, FColor::Red, FColor::Green, Duration);
 
-	return OutHit;
+	return Hit;
 }

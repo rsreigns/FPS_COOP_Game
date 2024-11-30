@@ -25,8 +25,12 @@ AMyCharacter::AMyCharacter()
 
 	PrimaryActorTick.bCanEverTick = true;
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-	SpringArm->SetupAttachment(GetMesh(), "CameraSocket");
+	SpringArm->SetupAttachment(RootComponent);
 	SpringArm->TargetArmLength = 0.f;
+
+	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPerson Mesh"));
+	FirstPersonMesh->SetupAttachment(SpringArm);
+	
 	MyInputComponent = CreateDefaultSubobject<UEnhancedInputComponent>(TEXT("InputComponent"));
 
 	CurrentHealth = MaxHealth;
@@ -282,11 +286,12 @@ void AMyCharacter::EquipWeapon(TSubclassOf<AWeaponBase> ToEquipWeapon)
 	SpawnParams.Owner = this;
 	SpawnParams.Instigator = this;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	FTransform WeaponTransform = GetMesh()->GetSocketTransform(FName("WeaponSocket"));
+	FTransform WeaponTransform = FTransform();//GetFPMesh()->GetSocketTransform(FName("WeaponSocket"));
 	
 	EquippedWeapon = GetWorld()->SpawnActor<AWeaponBase>(ToEquipWeapon, WeaponTransform, SpawnParams);
 
-	EquippedWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), FName("WeaponSocket"));
+	EquippedWeapon->AttachToComponent(GetFPMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget,
+		true), FName("WeaponSocket"));
 
 }
 
@@ -301,26 +306,5 @@ void AMyCharacter::SetCurrentHealth(float healthValue)
 	}
 }
 
-FTransform AMyCharacter::GetLeftHandIK()
-{
-	if (EquippedWeapon)
-	{
-		FVector LHIKLocation = EquippedWeapon->GetWeaponMesh()->GetSocketLocation("LHIK");
-		FRotator LHIKRotation = EquippedWeapon->GetWeaponMesh()->GetSocketRotation("LHIK");
-
-		FVector NewLocation;
-		FRotator NewRotation;
-		
-		GetMesh()->TransformToBoneSpace("hand_r", LHIKLocation, LHIKRotation, NewLocation, NewRotation);
-
-		return FTransform(NewRotation, NewLocation);
-	}
-	return FTransform();
-}
-
-USpringArmComponent* AMyCharacter::GetSpringArmComponent()
-{
-	return SpringArm;
-}
 
 

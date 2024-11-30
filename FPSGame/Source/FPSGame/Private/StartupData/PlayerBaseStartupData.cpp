@@ -34,7 +34,7 @@ void UPlayerBaseStartupData::GiveAbilitiesToASC(UAbilitySystemComponent* InASC, 
 			FGameplayAbilitySpec AbilitySpec(Map.Ability);
 			AbilitySpec.SourceObject = InASC->GetAvatarActor();
 			AbilitySpec.Level = level;
-			AbilitySpec.DynamicAbilityTags.AddTag(Map.AbilityTag);
+			AbilitySpec.GetDynamicSpecSourceTags().AddTag(Map.AbilityTag);
 			InASC->GiveAbility(AbilitySpec);
 		}
 	}

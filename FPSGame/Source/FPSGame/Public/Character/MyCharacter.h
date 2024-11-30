@@ -45,6 +45,9 @@ protected:
 #pragma region Components
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Components")
+	USkeletalMeshComponent* FirstPersonMesh;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Components")
 	USpringArmComponent* SpringArm;
 	UPROPERTY()
 	UCameraComponent* CameraComponent;
@@ -157,10 +160,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Health")
 	void SetCurrentHealth(float healthValue);
 	
-	UFUNCTION(BlueprintCallable,BlueprintPure)
-	FTransform GetLeftHandIK();
 
-	USpringArmComponent* GetSpringArmComponent();
+
+	
 
 #pragma region Variables
 	UPROPERTY(BlueprintReadOnly)
@@ -180,7 +182,9 @@ public:
 
 #pragma region InlineFunctions
 
-	FORCEINLINE  UCameraComponent* GetCameraComponent() { return CameraComponent; }
-
+	FORCEINLINE  UCameraComponent* GetCameraComponent()const { return CameraComponent; }
+	FORCEINLINE USkeletalMeshComponent* GetFPMesh() const{ return FirstPersonMesh; }
+	FORCEINLINE USpringArmComponent* GetSpringArmComponent() const {return SpringArm;}
+	
 #pragma endregion
 };

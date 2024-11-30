@@ -25,7 +25,5 @@ protected:
 	FRotator DeltaRot;
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
 	bool bIsPlayerADS = false;
-	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
-	FTransform LHIKTransform;
 
 };
