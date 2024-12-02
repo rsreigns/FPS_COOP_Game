@@ -131,7 +131,7 @@ protected:
 	void StopFire();
 
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
-	void HandleADS();
+	void HandleAds();
 
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	void HandleStartInteract();

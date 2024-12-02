@@ -12,8 +12,6 @@
       <Filter>Source</Filter>
     </None>
     <None Include="..\..\.vsconfig" />
-    <None Include="..\..\UpgradeLog.htm" />
-    <None Include="..\..\UpgradeLog2.htm" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -59,9 +57,6 @@
     <ClCompile Include="..\..\Source\FPSGame\Private\OurGameplayTags.cpp">
       <Filter>Source\FPSGame\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSGame\Private\WeaponBase.cpp">
-      <Filter>Source\FPSGame\Private</Filter>
-    </ClCompile>
     <Filter Include="Source\FPSGame\Private\AbilitySystem">
       <UniqueIdentifier>{BB37CA12-0704-35C5-AD01-3F3465668CCD}</UniqueIdentifier>
     </Filter>
@@ -77,6 +72,12 @@
     <ClCompile Include="..\..\Source\FPSGame\Private\AbilitySystem\Abilities\PlayerGameplayAbility.cpp">
       <Filter>Source\FPSGame\Private\AbilitySystem\Abilities</Filter>
     </ClCompile>
+    <Filter Include="Source\FPSGame\Private\Actors">
+      <UniqueIdentifier>{CBF75056-8F03-373F-800C-1BED85490DC5}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Actors\ProjectileBase.cpp">
+      <Filter>Source\FPSGame\Private\Actors</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Private\Animation">
       <UniqueIdentifier>{BC3E716F-144D-31D0-AD4E-5EE6BA39F0C6}</UniqueIdentifier>
     </Filter>
@@ -85,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Private\Animation\MyBaseAnimInstance.cpp">
       <Filter>Source\FPSGame\Private\Animation</Filter>
+    </ClCompile>
+    <Filter Include="Source\FPSGame\Private\Camera">
+      <UniqueIdentifier>{9ED7D127-0C38-3151-B146-DE0C297C23A1}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Camera\CameraManager.cpp">
+      <Filter>Source\FPSGame\Private\Camera</Filter>
     </ClCompile>
     <Filter Include="Source\FPSGame\Private\Character">
       <UniqueIdentifier>{1DDB29F6-08E0-309C-959E-3A56A19036DE}</UniqueIdentifier>
@@ -131,13 +138,19 @@
     <ClCompile Include="..\..\Source\FPSGame\Private\UI\MyHUD.cpp">
       <Filter>Source\FPSGame\Private\UI</Filter>
     </ClCompile>
+    <Filter Include="Source\FPSGame\Private\Weapons">
+      <UniqueIdentifier>{A13EF8E0-96BA-39CA-B937-6D81422ED19C}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\FirearmBase.cpp">
+      <Filter>Source\FPSGame\Private\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\WeaponBase.cpp">
+      <Filter>Source\FPSGame\Private\Weapons</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public">
       <UniqueIdentifier>{DF6A9987-3503-33D0-8038-411697992443}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\FPSGame\Public\OurGameplayTags.h">
-      <Filter>Source\FPSGame\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSGame\Public\WeaponBase.h">
       <Filter>Source\FPSGame\Public</Filter>
     </ClCompile>
     <Filter Include="Source\FPSGame\Public\AbilitySystem">
@@ -155,6 +168,12 @@
     <ClCompile Include="..\..\Source\FPSGame\Public\AbilitySystem\Abilities\PlayerGameplayAbility.h">
       <Filter>Source\FPSGame\Public\AbilitySystem\Abilities</Filter>
     </ClCompile>
+    <Filter Include="Source\FPSGame\Public\Actors">
+      <UniqueIdentifier>{AA4F1157-DF3E-30F7-99F8-42AB105D40A6}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Actors\ProjectileBase.h">
+      <Filter>Source\FPSGame\Public\Actors</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\Animation">
       <UniqueIdentifier>{BC6CC832-B51E-3F43-B8B9-180BEF52EBA2}</UniqueIdentifier>
     </Filter>
@@ -163,6 +182,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\Animation\MyBaseAnimInstance.h">
       <Filter>Source\FPSGame\Public\Animation</Filter>
+    </ClCompile>
+    <Filter Include="Source\FPSGame\Public\Camera">
+      <UniqueIdentifier>{E67E3432-7BE9-300A-A66D-50C97A158B1A}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Camera\CameraManager.h">
+      <Filter>Source\FPSGame\Public\Camera</Filter>
     </ClCompile>
     <Filter Include="Source\FPSGame\Public\Character">
       <UniqueIdentifier>{76DF58EC-B544-3F99-8C98-7670191A0CDD}</UniqueIdentifier>
@@ -208,6 +233,15 @@
     </Filter>
     <ClCompile Include="..\..\Source\FPSGame\Public\UI\MyHUD.h">
       <Filter>Source\FPSGame\Public\UI</Filter>
+    </ClCompile>
+    <Filter Include="Source\FPSGame\Public\Weapons">
+      <UniqueIdentifier>{57749C17-1481-39A8-A354-94526B1C0DF6}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\FirearmBase.h">
+      <Filter>Source\FPSGame\Public\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\WeaponBase.h">
+      <Filter>Source\FPSGame\Public\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

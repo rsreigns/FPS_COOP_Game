@@ -118,8 +118,8 @@ DEFINE_FUNCTION(AMyCharacter::execGetMaxHealth)
 }
 // End Class AMyCharacter Function GetMaxHealth
 
-// Begin Class AMyCharacter Function HandleADS
-struct Z_Construct_UFunction_AMyCharacter_HandleADS_Statics
+// Begin Class AMyCharacter Function HandleAds
+struct Z_Construct_UFunction_AMyCharacter_HandleAds_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -129,24 +129,24 @@ struct Z_Construct_UFunction_AMyCharacter_HandleADS_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_HandleADS_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "HandleADS", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_HandleADS_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_HandleADS_Statics::Function_MetaDataParams) };
-UFunction* Z_Construct_UFunction_AMyCharacter_HandleADS()
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_HandleAds_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "HandleAds", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_HandleAds_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_HandleAds_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AMyCharacter_HandleAds()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_HandleADS_Statics::FuncParams);
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_HandleAds_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
-DEFINE_FUNCTION(AMyCharacter::execHandleADS)
+DEFINE_FUNCTION(AMyCharacter::execHandleAds)
 {
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->HandleADS();
+	P_THIS->HandleAds();
 	P_NATIVE_END;
 }
-// End Class AMyCharacter Function HandleADS
+// End Class AMyCharacter Function HandleAds
 
 // Begin Class AMyCharacter Function HandleJump
 struct Z_Construct_UFunction_AMyCharacter_HandleJump_Statics
@@ -534,7 +534,7 @@ void AMyCharacter::StaticRegisterNativesAMyCharacter()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "GetCurrentHealth", &AMyCharacter::execGetCurrentHealth },
 		{ "GetMaxHealth", &AMyCharacter::execGetMaxHealth },
-		{ "HandleADS", &AMyCharacter::execHandleADS },
+		{ "HandleAds", &AMyCharacter::execHandleAds },
 		{ "HandleJump", &AMyCharacter::execHandleJump },
 		{ "HandleLook", &AMyCharacter::execHandleLook },
 		{ "HandleMove", &AMyCharacter::execHandleMove },
@@ -685,7 +685,7 @@ struct Z_Construct_UClass_AMyCharacter_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMyCharacter_GetCurrentHealth, "GetCurrentHealth" }, // 1045261550
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxHealth, "GetMaxHealth" }, // 1737394467
-		{ &Z_Construct_UFunction_AMyCharacter_HandleADS, "HandleADS" }, // 1264241042
+		{ &Z_Construct_UFunction_AMyCharacter_HandleAds, "HandleAds" }, // 2573299350
 		{ &Z_Construct_UFunction_AMyCharacter_HandleJump, "HandleJump" }, // 2831584708
 		{ &Z_Construct_UFunction_AMyCharacter_HandleLook, "HandleLook" }, // 3852004594
 		{ &Z_Construct_UFunction_AMyCharacter_HandleMove, "HandleMove" }, // 1955031087
@@ -807,10 +807,10 @@ AMyCharacter::~AMyCharacter() {}
 struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3525414629U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3037047965U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_1766875910(TEXT("/Script/FPSGame"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_885283149(TEXT("/Script/FPSGame"),
 	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

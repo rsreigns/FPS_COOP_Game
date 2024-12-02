@@ -13,7 +13,7 @@
 #include "InputMappingContext.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "WeaponBase.h"
+#include "Weapons/WeaponBase.h"
 #include "Kismet/KismetMathLibrary.h"
 
 #include "FPSGame/DebugHelper.h"
@@ -75,8 +75,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ThisClass::StartFire);
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &ThisClass::StopFire);
 	MyInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ThisClass::HandleJump);
-	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Started, this, &ThisClass::HandleADS);
-	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Completed, this, &ThisClass::HandleADS);
+	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Started, this, &ThisClass::HandleAds);
+	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Completed, this, &ThisClass::HandleAds);
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ThisClass::HandleStartInteract);
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Completed, this, &ThisClass::HandleStopInteract);
 }
@@ -166,8 +166,9 @@ void AMyCharacter::StopFire()
 
 }
 
-void AMyCharacter::HandleADS()
+void AMyCharacter::HandleAds()
 {
+	if (EquippedWeapon->WeaponType != EWeaponType::Firearm) return;
 	if (EquippedWeapon)
 	{
 		if (bIsADS)

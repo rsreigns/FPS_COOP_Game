@@ -24,7 +24,7 @@ struct FInputActionValue;
 	DECLARE_FUNCTION(execGetMaxHealth); \
 	DECLARE_FUNCTION(execHandleStopInteract); \
 	DECLARE_FUNCTION(execHandleStartInteract); \
-	DECLARE_FUNCTION(execHandleADS); \
+	DECLARE_FUNCTION(execHandleAds); \
 	DECLARE_FUNCTION(execStopFire); \
 	DECLARE_FUNCTION(execStartFire); \
 	DECLARE_FUNCTION(execHandleJump); \

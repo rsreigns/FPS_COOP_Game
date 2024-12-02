@@ -67,7 +67,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{67576A1D-7AAA-36EA-A8E3-8B02E1159A18}</ProjectGuid>
+    <ProjectGuid>{87522DBF-A599-32EB-8715-C6B62AC9D756}</ProjectGuid>
     <RootNamespace>FPSGame</RootNamespace>
   </PropertyGroup>
   <Import Project="UECommon.props" />
@@ -253,8 +253,6 @@
     <None Include="..\..\Source\FPSGame.Target.cs"/>
     <None Include="..\..\Source\FPSGameEditor.Target.cs"/>
     <None Include="..\..\.vsconfig"/>
-    <None Include="..\..\UpgradeLog.htm"/>
-    <None Include="..\..\UpgradeLog2.htm"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini"/>
     <None Include="..\..\Config\DefaultEngine.ini"/>
@@ -279,9 +277,6 @@
     <ClCompile Include="..\..\Source\FPSGame\Private\OurGameplayTags.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSGame\Private\WeaponBase.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Private\AbilitySystem\BaseAbilitySystemComponent.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -291,10 +286,16 @@
     <ClCompile Include="..\..\Source\FPSGame\Private\AbilitySystem\Abilities\PlayerGameplayAbility.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Actors\ProjectileBase.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Private\Animation\BaseAnimInstance.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Private\Animation\MyBaseAnimInstance.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Camera\CameraManager.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Private\Character\BaseCharacter.cpp">
@@ -324,10 +325,13 @@
     <ClCompile Include="..\..\Source\FPSGame\Private\UI\MyHUD.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSGame\Public\OurGameplayTags.h">
+    <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\FirearmBase.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSGame\Public\WeaponBase.h">
+    <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\WeaponBase.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\OurGameplayTags.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\AbilitySystem\BaseAbilitySystemComponent.h">
@@ -339,10 +343,16 @@
     <ClCompile Include="..\..\Source\FPSGame\Public\AbilitySystem\Abilities\PlayerGameplayAbility.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Actors\ProjectileBase.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\Animation\BaseAnimInstance.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\Animation\MyBaseAnimInstance.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Camera\CameraManager.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\Character\BaseCharacter.h">
@@ -370,6 +380,12 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\UI\MyHUD.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\FirearmBase.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\WeaponBase.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemGroup>
