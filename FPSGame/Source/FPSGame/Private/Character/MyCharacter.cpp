@@ -81,13 +81,6 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Completed, this, &ThisClass::HandleStopInteract);
 }
 
-void AMyCharacter::PlayerPressedInteract() const
-{
-}
-
-void AMyCharacter::PlayerReleasedInteract() const
-{
-}
 
 
 
@@ -209,10 +202,9 @@ void AMyCharacter::HandleStartInteract()
 	if (OutHit.bBlockingHit && OutHit.GetActor()->GetClass()->ImplementsInterface(UNativeInteractionInterface::StaticClass()))
 	{
 		InteractingActor = OutHit.GetActor();
-		INativeInteractionInterface* InteractInterface = Cast<INativeInteractionInterface>(OutHit.GetActor());
-			if (InteractInterface)
+			if (INativeInteractionInterface* InteractInterface = Cast<INativeInteractionInterface>(OutHit.GetActor()))
 			{
-				InteractInterface->PlayerPressedInteract();
+				InteractInterface->PlayerPressedInteract(this);
 			}
 	}
 }
@@ -221,10 +213,9 @@ void AMyCharacter::HandleStopInteract()
 {
 	if (InteractingActor)
 	{
-		INativeInteractionInterface* InteractInterface = Cast<INativeInteractionInterface>(InteractingActor);
-		if (InteractInterface)
+		if (INativeInteractionInterface* InteractInterface = Cast<INativeInteractionInterface>(InteractingActor))
 		{
-			InteractInterface->PlayerReleasedInteract();
+			InteractInterface->PlayerReleasedInteract(this);
 		}
 		InteractingActor = nullptr;
 	}

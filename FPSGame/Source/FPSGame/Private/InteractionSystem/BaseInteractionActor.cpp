@@ -5,6 +5,8 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "Character/MyCharacter.h"
+#include "Components/SkeletalMeshComponent.h"
 
 #include "FPSGame/DebugHelper.h"
 
@@ -13,18 +15,21 @@ ABaseInteractionActor::ABaseInteractionActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
 	SphereOverlapComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereOverlapComponent"));
 	SphereOverlapComponent->SetGenerateOverlapEvents(true);
 	SphereOverlapComponent->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnBeginOverlap);
 	SphereOverlapComponent->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::OnEndOverlap);
 	SphereOverlapComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	SphereOverlapComponent->SetSphereRadius(120.f, true);
+	SphereOverlapComponent->SetupAttachment(RootComponent);
+
+	ActorMesh = CreateDefaultSubobject<USkeletalMeshComponent>("ActorMesh");
+	ActorMesh->SetupAttachment(SphereOverlapComponent);
 
 	WidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractionWidget"));
-	WidgetComponent->SetupAttachment(SphereOverlapComponent);
-	WidgetComponent->SetDrawAtDesiredSize(true);
-	WidgetComponent->SetDrawSize(FVector2D(32.f, 32.f));
-	WidgetComponent->SetWidgetClass(InteractionWidget);
+	WidgetComponent->SetupAttachment(ActorMesh);
+
 
 }
 
@@ -32,22 +37,31 @@ ABaseInteractionActor::ABaseInteractionActor()
 void ABaseInteractionActor::BeginPlay()
 {
 	Super::BeginPlay();
-	if (!Cast<APawn>(GetOwner()))
+
+}
+
+void ABaseInteractionActor::PlayerPressedInteract(APawn* PlayerPawn) 
+{
+	INativeInteractionInterface::PlayerPressedInteract(PlayerPawn);
+	if (InteractionType == EInteractionType::Equipment)
 	{
-		SphereOverlapComponent->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
+		if (EquipmentType == EEquipmentType::Weapon)
+		{
+			if (AMyCharacter* MyCharacter = Cast<AMyCharacter>(PlayerPawn))
+			{
+				MyCharacter->EquipWeapon(WeaponClass);
+				Destroy();
+			}
+		}
 	}
-	WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::Collapsed);
 }
 
-void ABaseInteractionActor::PlayerPressedInteract() const
+void ABaseInteractionActor::PlayerReleasedInteract(APawn* PlayerPawn)
 {
-	DEBUG::PrintString("Press event recieved");
+	INativeInteractionInterface::PlayerReleasedInteract(PlayerPawn);
 }
 
-void ABaseInteractionActor::PlayerReleasedInteract() const
-{
-	DEBUG::PrintString("Release event recieved");
-}
+
 
 // Called every frame
 void ABaseInteractionActor::Tick(float DeltaTime)
@@ -58,11 +72,26 @@ void ABaseInteractionActor::Tick(float DeltaTime)
 
 void ABaseInteractionActor::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	if (Cast<APawn>(OtherActor))
+	{
+		WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+		OverlappingActors.AddUnique(OtherActor);
+	}
 }
 
 void ABaseInteractionActor::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::Collapsed);
+	if (OtherActor)
+	{
+		if (Cast<APawn>(OtherActor))
+		{
+			if (WidgetComponent && WidgetComponent->GetWidget())
+			{
+				WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::Collapsed);
+			}
+			OverlappingActors.Remove(OtherActor);
+		}
+	}
+
 }
 

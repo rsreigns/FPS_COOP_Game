@@ -2,10 +2,10 @@
 
 // Add default functionality here for any INativeInteractionInterface functions that are not pure virtual.
 
-void INativeInteractionInterface::PlayerPressedInteract() const
+void INativeInteractionInterface::PlayerPressedInteract(APawn* PlayerPawn) 
 {
 }
 
-void INativeInteractionInterface::PlayerReleasedInteract() const
+void INativeInteractionInterface::PlayerReleasedInteract(APawn* PlayerPawn) 
 {
 }

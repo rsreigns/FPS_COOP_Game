@@ -19,7 +19,7 @@ class FPSGAME_API INativeInteractionInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	virtual void PlayerPressedInteract() const ;
-	virtual void PlayerReleasedInteract() const ;
+	virtual void PlayerPressedInteract(APawn* PlayerPawn)  ;
+	virtual void PlayerReleasedInteract(APawn* PlayerPawn)  ;
 
 };

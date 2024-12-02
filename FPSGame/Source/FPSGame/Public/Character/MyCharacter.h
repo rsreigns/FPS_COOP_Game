@@ -22,21 +22,19 @@ class FPSGAME_API AMyCharacter : public ABaseCharacter, public INativeInteractio
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
+
 	AMyCharacter();
 
 #pragma region Overriden functions
 
-	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	void PlayerPressedInteract() const ;
-	void PlayerReleasedInteract() const ;
+	
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
-	float TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	virtual float TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 
 #pragma endregion
@@ -146,11 +144,13 @@ protected:
 	FHitResult DoSphereTraceByObject(FVector Start, FVector End,float TraceRadius = 5.f, bool ShowDebug = false, bool ForDuration = false, float Duration = 2.f);
 	
 	void RegisterCameraComponent();
-	void EquipWeapon(TSubclassOf<AWeaponBase> ToEquipWeapon);
+	
 
 
 public:	
 
+	void EquipWeapon(TSubclassOf<AWeaponBase> ToEquipWeapon);
+	
 	UFUNCTION(BlueprintPure, Category = "Health")
 	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
 

@@ -17,12 +17,12 @@ struct FHitResult;
 #endif
 #define FPSGAME_BaseInteractionActor_generated_h
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_30_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execOnEndOverlap); \
 	DECLARE_FUNCTION(execOnBeginOverlap);
 
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_17_INCLASS_NO_PURE_DECLS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_30_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesABaseInteractionActor(); \
 	friend struct Z_Construct_UClass_ABaseInteractionActor_Statics; \
@@ -32,7 +32,7 @@ public: \
 	virtual UObject* _getUObject() const override { return const_cast<ABaseInteractionActor*>(this); }
 
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_17_ENHANCED_CONSTRUCTORS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_30_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	ABaseInteractionActor(ABaseInteractionActor&&); \
@@ -44,13 +44,13 @@ public: \
 	NO_API virtual ~ABaseInteractionActor();
 
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_14_PROLOG
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_17_GENERATED_BODY \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_27_PROLOG
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_30_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_17_INCLASS_NO_PURE_DECLS \
-	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_17_ENHANCED_CONSTRUCTORS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_30_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_30_INCLASS_NO_PURE_DECLS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_30_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -60,5 +60,21 @@ template<> FPSGAME_API UClass* StaticClass<class ABaseInteractionActor>();
 #undef CURRENT_FILE_ID
 #define CURRENT_FILE_ID FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h
 
+
+#define FOREACH_ENUM_EINTERACTIONTYPE(op) \
+	op(EInteractionType::Equipment) \
+	op(EInteractionType::Trigger) 
+
+enum class EInteractionType : uint8;
+template<> struct TIsUEnumClass<EInteractionType> { enum { Value = true }; };
+template<> FPSGAME_API UEnum* StaticEnum<EInteractionType>();
+
+#define FOREACH_ENUM_EEQUIPMENTTYPE(op) \
+	op(EEquipmentType::Weapon) \
+	op(EEquipmentType::InventoryItem) 
+
+enum class EEquipmentType : uint8;
+template<> struct TIsUEnumClass<EEquipmentType> { enum { Value = true }; };
+template<> FPSGAME_API UEnum* StaticEnum<EEquipmentType>();
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

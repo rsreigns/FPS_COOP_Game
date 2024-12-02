@@ -39,18 +39,7 @@ void AWeaponBase::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 	if (bIsResettingRecoilRotation)
 	{
-		FRotator CurrentRotation = OwningPlayer->GetControlRotation();
-		FRotator NewRotation = FMath::RInterpTo(CurrentRotation, PreRecoilRotation, DeltaSeconds,2.f);
-
-		DEBUG::PrintString(FString::Printf(TEXT("Rotation Pitch and Yaw : %f and  %f"),NewRotation.Pitch,NewRotation.Yaw));
-		OwningPlayer->GetController()->SetControlRotation(NewRotation);
-		float Tolerance = 0.1f;
-		if (FMath::Abs(CurrentRotation.Pitch - PreRecoilRotation.Pitch) <= Tolerance &&
-			FMath::Abs(CurrentRotation.Yaw - PreRecoilRotation.Yaw) <= Tolerance &&
-			FMath::Abs(CurrentRotation.Roll - PreRecoilRotation.Roll) <= Tolerance)
-		{
-			bIsResettingRecoilRotation = false;
-		}
+		
 	}
 }
 
@@ -213,7 +202,8 @@ FHitResult AWeaponBase::DoLineTraceByObject(FVector Start, FVector End, bool Sho
 	}
 	FHitResult Hit;
 	UKismetSystemLibrary::LineTraceSingleForObjects
-	(this, Start, End, TraceObjectTypes, false, TArray<AActor*>(), DebugType, OutHit, true, FColor::Red, FColor::Green, Duration);
+	(this, Start, End, TraceObjectTypes, false, TArray<AActor*>(),
+		DebugType, OutHit, true, FColor::Red, FColor::Green, Duration);
 
 	return Hit;
 }

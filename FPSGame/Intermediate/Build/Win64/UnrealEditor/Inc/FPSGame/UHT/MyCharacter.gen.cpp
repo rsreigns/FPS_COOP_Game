@@ -503,7 +503,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCha
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "TakeDamage", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::MyCharacter_eventTakeDamage_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "TakeDamage", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::MyCharacter_eventTakeDamage_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::Function_MetaDataParams) };
 static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_TakeDamage_Statics::MyCharacter_eventTakeDamage_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_AMyCharacter_TakeDamage()
 {
@@ -695,7 +695,7 @@ struct Z_Construct_UClass_AMyCharacter_Statics
 		{ &Z_Construct_UFunction_AMyCharacter_SetCurrentHealth, "SetCurrentHealth" }, // 3089064192
 		{ &Z_Construct_UFunction_AMyCharacter_StartFire, "StartFire" }, // 2949074692
 		{ &Z_Construct_UFunction_AMyCharacter_StopFire, "StopFire" }, // 840451391
-		{ &Z_Construct_UFunction_AMyCharacter_TakeDamage, "TakeDamage" }, // 2829844253
+		{ &Z_Construct_UFunction_AMyCharacter_TakeDamage, "TakeDamage" }, // 4105059204
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static const UECodeGen_Private::FImplementedInterfaceParams InterfaceParams[];
@@ -807,10 +807,10 @@ AMyCharacter::~AMyCharacter() {}
 struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 276689063U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 3525414629U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_1245467202(TEXT("/Script/FPSGame"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_1766875910(TEXT("/Script/FPSGame"),
 	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

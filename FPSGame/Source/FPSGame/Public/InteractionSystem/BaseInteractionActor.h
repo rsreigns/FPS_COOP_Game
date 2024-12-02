@@ -10,6 +10,19 @@
 class UWidgetComponent;
 class UUserWidget;
 class USphereComponent;
+class USkeletalMeshComponent;
+class AWeaponBase;
+
+UENUM(BlueprintType)
+enum class EInteractionType : uint8
+{
+	Equipment, Trigger
+};
+UENUM(BlueprintType)
+enum class EEquipmentType : uint8
+{
+	Weapon, InventoryItem
+};
 
 UCLASS()
 class FPSGAME_API ABaseInteractionActor : public AActor, public INativeInteractionInterface
@@ -23,11 +36,15 @@ public:
 protected:
 #pragma region Components
 
-	UPROPERTY(EditDefaultsOnly,Category = "CoreGameplay")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category="Interaction|Components")
+	USkeletalMeshComponent* ActorMesh;
+	
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Interaction|Components")
 	USphereComponent* SphereOverlapComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "CoreGameplay")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,  Category = "Interaction|Components")
 	UWidgetComponent* WidgetComponent;
+
 
 
 #pragma endregion
@@ -35,8 +52,8 @@ protected:
 #pragma region Overrides
 
 	virtual void BeginPlay() override;
-	virtual void PlayerPressedInteract() const override;
-	virtual void PlayerReleasedInteract() const override;
+	virtual void PlayerPressedInteract(APawn* PlayerPawn)  override;
+	virtual void PlayerReleasedInteract(APawn* PlayerPawn)  override;
 
 public:
 	virtual void Tick(float DeltaTime) override;
@@ -44,8 +61,23 @@ public:
 #pragma endregion
 
 #pragma region Variables 
-	TSubclassOf<UUserWidget> InteractionWidget;
 
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Interaction")
+	EInteractionType InteractionType = EInteractionType::Trigger;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction",
+		meta = (EditCondition = "InteractionType == EInteractionType::Equipment ",EditConditionHides =true))
+	EEquipmentType EquipmentType = EEquipmentType::InventoryItem;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction",
+		meta = (EditCondition =
+			"EquipmentType == EEquipmentType::Weapon && InteractionType == EInteractionType::Equipment ",
+			EditConditionHides =true))
+	TSubclassOf<AWeaponBase> WeaponClass;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
+	TArray<AActor*> OverlappingActors;
+	
 #pragma endregion
 
 #pragma region Functions

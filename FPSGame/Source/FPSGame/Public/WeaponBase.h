@@ -59,13 +59,13 @@ protected:
 	EWeaponFireType WeaponFireType = EWeaponFireType::Trace;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Weapon|Core",
-		meta = (EditCondition = "WeaponFiringMode == EWeaponFiringMode::Burst"))
+		meta = (EditCondition = "WeaponFiringMode == EWeaponFiringMode::Burst",EditConditionHides =true))
 	int32 BurstFireBulletCount =3;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Weapon|Core",
-		meta = (EditCondition = "WeaponFiringMode == EWeaponFiringMode::Burst"))
+		meta = (EditCondition = "WeaponFiringMode == EWeaponFiringMode::Burst",EditConditionHides =true))
 	float BurstFireDelay = 0.1f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Weapon|Core",
-	meta = (EditCondition = "WeaponFireType == EWeaponFireType::Projectile"))
+	meta = (EditCondition = "WeaponFireType == EWeaponFireType::Projectile",EditConditionHides =true))
 	TSubclassOf<AProjectileBase> ProjectileClass;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
@@ -76,11 +76,14 @@ protected:
 	int32 MaxAmmo = 20;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
 	float ReloadTime =3.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core",
+		meta = (EditCondition = "WeaponFireType == EWeaponFireType::Trace",EditConditionHides =true))
 	float WeaponDamage = 25.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core",
+		meta = (EditCondition = "WeaponFireType == EWeaponFireType::Trace",EditConditionHides =true))
 	float CriticalDamageMultiplier = 2.5f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core",
+		meta = (EditCondition = "WeaponFireType == EWeaponFireType::Trace",EditConditionHides =true))
 	TSubclassOf<UDamageType> DamageTypeClass;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
 	FVector2D RecoilYaw ;
