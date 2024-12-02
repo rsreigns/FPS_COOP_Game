@@ -41,9 +41,7 @@ public:
 
 protected:
 #pragma region Components
-
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Components")
-	USkeletalMeshComponent* FirstPersonMesh;
+	
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Components")
 	USpringArmComponent* SpringArm;
@@ -151,22 +149,31 @@ public:
 
 	void EquipWeapon(TSubclassOf<AWeaponBase> ToEquipWeapon);
 	
-	UFUNCTION(BlueprintPure, Category = "Health")
+	UFUNCTION(BlueprintPure, BlueprintCallable,Category = "Health")
 	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
 
-	UFUNCTION(BlueprintPure, Category = "Health")
+	UFUNCTION(BlueprintPure, BlueprintCallable,Category = "Health")
 	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
 	void SetCurrentHealth(float healthValue);
-	
 
+	UFUNCTION(BlueprintCallable,BlueprintPure, Category = "LHIK")
+	FTransform GetLhikTransform();
 
 	
 
 #pragma region Variables
 	UPROPERTY(BlueprintReadOnly)
 	FRotator DeltaRotation = FRotator::ZeroRotator;
+
+	UPROPERTY(BlueprintReadOnly)
+	float MovementSway;
+	UPROPERTY(BlueprintReadOnly)
+	float MouseSwayX;
+	UPROPERTY(BlueprintReadOnly)
+	float MouseSwayY;
+	
 
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsADS=false;
@@ -183,7 +190,6 @@ public:
 #pragma region InlineFunctions
 
 	FORCEINLINE  UCameraComponent* GetCameraComponent()const { return CameraComponent; }
-	FORCEINLINE USkeletalMeshComponent* GetFPMesh() const{ return FirstPersonMesh; }
 	FORCEINLINE USpringArmComponent* GetSpringArmComponent() const {return SpringArm;}
 	
 #pragma endregion

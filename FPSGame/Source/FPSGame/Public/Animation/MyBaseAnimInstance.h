@@ -16,14 +16,26 @@ class FPSGAME_API UMyBaseAnimInstance : public UBaseAnimInstance
 protected:
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
-	
+#pragma region BlueprintVariables
 	UPROPERTY(BlueprintReadOnly,Category = "Animation|Player")
 	AMyCharacter* PlayerOwningCharacter;
-
-
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
 	FRotator DeltaRot;
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
 	bool bIsPlayerADS = false;
+	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
+	FTransform LHIKTransform;
+	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
+	FRotator SwayRotation;
+	
+#pragma endregion
+	
+#pragma region OtherVariables
+	
+	float MoveSway;
+	float MouseXSway;
+	float MouseYSway;
+	
+#pragma endregion
 
 };

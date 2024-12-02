@@ -25,11 +25,9 @@ AMyCharacter::AMyCharacter()
 
 	PrimaryActorTick.bCanEverTick = true;
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-	SpringArm->SetupAttachment(RootComponent);
+	SpringArm->SetupAttachment(GetMesh(),"CameraSocket");
 	SpringArm->TargetArmLength = 0.f;
-
-	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPerson Mesh"));
-	FirstPersonMesh->SetupAttachment(SpringArm);
+	
 	
 	MyInputComponent = CreateDefaultSubobject<UEnhancedInputComponent>(TEXT("InputComponent"));
 
@@ -70,6 +68,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 		Subsystem->AddMappingContext(MappingContext,0);
 	}
 	MyInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+	
 	MyInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::HandleMove);
 	MyInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ThisClass::HandleLook);
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ThisClass::StartFire);
@@ -79,6 +78,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Completed, this, &ThisClass::HandleAds);
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ThisClass::HandleStartInteract);
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Completed, this, &ThisClass::HandleStopInteract);
+	
 }
 
 
@@ -131,6 +131,7 @@ void AMyCharacter::HandleMove(const FInputActionValue& Value)
 	{
 		const FVector RightDirection = MovementRotation.RotateVector(FVector::RightVector);
 		AddMovementInput(RightDirection, MovementInput.X);
+		MovementSway = MovementInput.X;
 	}
 
 }
@@ -140,6 +141,8 @@ void AMyCharacter::HandleLook(const FInputActionValue& Value)
 	const FVector2D LookInput = Value.Get<FVector2D>();
 	AddControllerYawInput(LookInput.X);
 	AddControllerPitchInput(LookInput.Y);
+	MouseSwayX = LookInput.X;
+	MouseSwayY = LookInput.Y;
 
 	//PitchValue = GetBaseAimRotation().Pitch - GetActorRotation().Pitch  ;
 }
@@ -263,6 +266,7 @@ void AMyCharacter::RegisterCameraComponent()
 {
 	CameraComponent = NewObject <UCameraComponent>(this, UCameraComponent::StaticClass(), "CameraComponent");
 
+	
 	//CameraComponent->bUsePawnControlRotation = true;
 	CameraComponent->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f));
 	//CameraComponent->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), "CameraSocket");
@@ -278,11 +282,11 @@ void AMyCharacter::EquipWeapon(TSubclassOf<AWeaponBase> ToEquipWeapon)
 	SpawnParams.Owner = this;
 	SpawnParams.Instigator = this;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	FTransform WeaponTransform = FTransform();//GetFPMesh()->GetSocketTransform(FName("WeaponSocket"));
+	FTransform WeaponTransform = GetMesh()->GetSocketTransform(FName("WeaponSocket"));
 	
 	EquippedWeapon = GetWorld()->SpawnActor<AWeaponBase>(ToEquipWeapon, WeaponTransform, SpawnParams);
 
-	EquippedWeapon->AttachToComponent(GetFPMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget,
+	EquippedWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget,
 		true), FName("WeaponSocket"));
 
 }
@@ -296,6 +300,18 @@ void AMyCharacter::SetCurrentHealth(float healthValue)
 		CurrentHealth = FMath::Clamp(healthValue, 0.f, MaxHealth);
 		OnHealthUpdate();
 	}
+}
+
+FTransform AMyCharacter::GetLhikTransform()
+{
+	if (!EquippedWeapon) return FTransform();
+	FTransform LHIKSocketTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform("LHIK");
+	FVector OutLocation;
+	FRotator OutRotation;
+	GetMesh()->TransformToBoneSpace("hand_r",
+		LHIKSocketTransform.GetLocation(),
+		LHIKSocketTransform.Rotator(),OutLocation,OutRotation);
+	return FTransform(OutRotation, OutLocation);
 }
 
 
