@@ -26,10 +26,9 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 		MouseYSway = PlayerOwningCharacter->MouseSwayY;
 
 		float MovingSway = FMath::GetMappedRangeValueClamped(FVector2D(-1,1),
-	FVector2D(-10,10),MoveSway);
+			FVector2D(-10,10),MoveSway);
 		
-		SwayRotation.Pitch = FMath::FInterpTo(SwayRotation.Pitch, MovingSway,
-			DeltaSeconds, 5.0f);
+		SwayRotation.Pitch = FMath::FInterpTo(SwayRotation.Pitch, MovingSway,DeltaSeconds, 5.0f);
 		
 		float MouseX = FMath::GetMappedRangeValueClamped(FVector2D(-1,1),
 			FVector2D(-10,10),MouseXSway);
@@ -37,7 +36,7 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 		SwayRotation.Yaw = FMath::FInterpTo(SwayRotation.Yaw,MouseX,DeltaSeconds,5.0f);
 		
 		float MouseY = FMath::GetMappedRangeValueClamped(FVector2D(1,-1),
-	FVector2D(-10,10),MouseYSway);
+			FVector2D(-10,10),MouseYSway);
 
 		SwayRotation.Roll = FMath::FInterpTo(SwayRotation.Roll,MouseY,DeltaSeconds,5.0f);
 	}

@@ -18,6 +18,7 @@ COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTransform();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_AController_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 ENGINE_API UEnum* Z_Construct_UEnum_Engine_EObjectTypeQuery();
@@ -33,6 +34,51 @@ FPSGAME_API UClass* Z_Construct_UClass_AWeaponBase_NoRegister();
 FPSGAME_API UClass* Z_Construct_UClass_UNativeInteractionInterface_NoRegister();
 UPackage* Z_Construct_UPackage__Script_FPSGame();
 // End Cross Module References
+
+// Begin Class AMyCharacter Function GetCameraComponent
+struct Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics
+{
+	struct MyCharacter_eventGetCameraComponent_Parms
+	{
+		UCameraComponent* ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Gameplay" },
+		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ReturnValue_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000080588, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventGetCameraComponent_Parms, ReturnValue), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ReturnValue_MetaData), NewProp_ReturnValue_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetCameraComponent", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::MyCharacter_eventGetCameraComponent_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::MyCharacter_eventGetCameraComponent_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AMyCharacter_GetCameraComponent()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetCameraComponent_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AMyCharacter::execGetCameraComponent)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(UCameraComponent**)Z_Param__Result=P_THIS->GetCameraComponent();
+	P_NATIVE_END;
+}
+// End Class AMyCharacter Function GetCameraComponent
 
 // Begin Class AMyCharacter Function GetCurrentHealth
 struct Z_Construct_UFunction_AMyCharacter_GetCurrentHealth_Statics
@@ -75,6 +121,48 @@ DEFINE_FUNCTION(AMyCharacter::execGetCurrentHealth)
 	P_NATIVE_END;
 }
 // End Class AMyCharacter Function GetCurrentHealth
+
+// Begin Class AMyCharacter Function GetEquippedWeapon
+struct Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics
+{
+	struct MyCharacter_eventGetEquippedWeapon_Parms
+	{
+		AWeaponBase* ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Gameplay" },
+		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventGetEquippedWeapon_Parms, ReturnValue), Z_Construct_UClass_AWeaponBase_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetEquippedWeapon", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::MyCharacter_eventGetEquippedWeapon_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::MyCharacter_eventGetEquippedWeapon_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AMyCharacter::execGetEquippedWeapon)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(AWeaponBase**)Z_Param__Result=P_THIS->GetEquippedWeapon();
+	P_NATIVE_END;
+}
+// End Class AMyCharacter Function GetEquippedWeapon
 
 // Begin Class AMyCharacter Function GetLhikTransform
 struct Z_Construct_UFunction_AMyCharacter_GetLhikTransform_Statics
@@ -159,6 +247,51 @@ DEFINE_FUNCTION(AMyCharacter::execGetMaxHealth)
 	P_NATIVE_END;
 }
 // End Class AMyCharacter Function GetMaxHealth
+
+// Begin Class AMyCharacter Function GetSpringArmComponent
+struct Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics
+{
+	struct MyCharacter_eventGetSpringArmComponent_Parms
+	{
+		USpringArmComponent* ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Gameplay" },
+		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ReturnValue_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000080588, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(MyCharacter_eventGetSpringArmComponent_Parms, ReturnValue), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ReturnValue_MetaData), NewProp_ReturnValue_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetSpringArmComponent", nullptr, nullptr, Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::PropPointers), sizeof(Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::MyCharacter_eventGetSpringArmComponent_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::Function_MetaDataParams), Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::MyCharacter_eventGetSpringArmComponent_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AMyCharacter::execGetSpringArmComponent)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(USpringArmComponent**)Z_Param__Result=P_THIS->GetSpringArmComponent();
+	P_NATIVE_END;
+}
+// End Class AMyCharacter Function GetSpringArmComponent
 
 // Begin Class AMyCharacter Function HandleAds
 struct Z_Construct_UFunction_AMyCharacter_HandleAds_Statics
@@ -574,9 +707,12 @@ void AMyCharacter::StaticRegisterNativesAMyCharacter()
 {
 	UClass* Class = AMyCharacter::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "GetCameraComponent", &AMyCharacter::execGetCameraComponent },
 		{ "GetCurrentHealth", &AMyCharacter::execGetCurrentHealth },
+		{ "GetEquippedWeapon", &AMyCharacter::execGetEquippedWeapon },
 		{ "GetLhikTransform", &AMyCharacter::execGetLhikTransform },
 		{ "GetMaxHealth", &AMyCharacter::execGetMaxHealth },
+		{ "GetSpringArmComponent", &AMyCharacter::execGetSpringArmComponent },
 		{ "HandleAds", &AMyCharacter::execHandleAds },
 		{ "HandleJump", &AMyCharacter::execHandleJump },
 		{ "HandleLook", &AMyCharacter::execHandleLook },
@@ -629,53 +765,65 @@ struct Z_Construct_UClass_AMyCharacter_Statics
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MappingContext_MetaData[] = {
-		{ "Category", "ActorCore|Input" },
+		{ "Category", "Player|Input" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MoveAction_MetaData[] = {
-		{ "Category", "ActorCore|Input|Action" },
+		{ "Category", "Player|Input|Actions" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 		{ "NativeConst", "" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LookAction_MetaData[] = {
-		{ "Category", "ActorCore|Input|Action" },
+		{ "Category", "Player|Input|Actions" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 		{ "NativeConst", "" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FireAction_MetaData[] = {
-		{ "Category", "ActorCore|Input|Action" },
+		{ "Category", "Player|Input|Actions" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 		{ "NativeConst", "" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_JumpAction_MetaData[] = {
-		{ "Category", "ActorCore|Input|Action" },
+		{ "Category", "Player|Input|Actions" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 		{ "NativeConst", "" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ADSAction_MetaData[] = {
-		{ "Category", "ActorCore|Input|Action" },
+		{ "Category", "Player|Input|Actions" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 		{ "NativeConst", "" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InteractAction_MetaData[] = {
-		{ "Category", "ActorCore|Input|Action" },
+		{ "Category", "Player|Input|Actions" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 		{ "NativeConst", "" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TraceObjectTypes_MetaData[] = {
-		{ "Category", "ActorCore|Trace" },
+		{ "Category", "Player|Interaction" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WeaponToSpawn_MetaData[] = {
-		{ "Category", "ActorCore|Gameplay|Projectile" },
+		{ "Category", "Player|Weapon" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InteractionRadius_MetaData[] = {
-		{ "Category", "ActorCore|Gameplay|Interaction" },
+		{ "Category", "Player|Interaction" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InteractionSphereRadius_MetaData[] = {
-		{ "Category", "ActorCore|Gameplay|Interaction" },
+		{ "Category", "Player|Interaction" },
+		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DeathMontage_MetaData[] = {
+		{ "Category", "Player|Montages" },
+		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HitMontage_MetaData[] = {
+		{ "Category", "Player|Montages" },
+		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ADSMontage_MetaData[] = {
+		{ "Category", "Player|Montages" },
 		{ "ModuleRelativePath", "Public/Character/MyCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_EquippedWeapon_MetaData[] = {
@@ -724,6 +872,9 @@ struct Z_Construct_UClass_AMyCharacter_Statics
 	static const UECodeGen_Private::FClassPropertyParams NewProp_WeaponToSpawn;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InteractionRadius;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InteractionSphereRadius;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_DeathMontage;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_HitMontage;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ADSMontage;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_EquippedWeapon;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_DeltaRotation;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MovementSway;
@@ -735,9 +886,12 @@ struct Z_Construct_UClass_AMyCharacter_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AMyCharacter_GetCameraComponent, "GetCameraComponent" }, // 687426709
 		{ &Z_Construct_UFunction_AMyCharacter_GetCurrentHealth, "GetCurrentHealth" }, // 1045261550
+		{ &Z_Construct_UFunction_AMyCharacter_GetEquippedWeapon, "GetEquippedWeapon" }, // 3584320619
 		{ &Z_Construct_UFunction_AMyCharacter_GetLhikTransform, "GetLhikTransform" }, // 1567147572
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxHealth, "GetMaxHealth" }, // 1737394467
+		{ &Z_Construct_UFunction_AMyCharacter_GetSpringArmComponent, "GetSpringArmComponent" }, // 2533027152
 		{ &Z_Construct_UFunction_AMyCharacter_HandleAds, "HandleAds" }, // 2573299350
 		{ &Z_Construct_UFunction_AMyCharacter_HandleJump, "HandleJump" }, // 2831584708
 		{ &Z_Construct_UFunction_AMyCharacter_HandleLook, "HandleLook" }, // 3852004594
@@ -775,6 +929,9 @@ const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AMyCharacter_St
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_WeaponToSpawn = { "WeaponToSpawn", nullptr, (EPropertyFlags)0x0024080000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, WeaponToSpawn), Z_Construct_UClass_UClass, Z_Construct_UClass_AWeaponBase_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponToSpawn_MetaData), NewProp_WeaponToSpawn_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_InteractionRadius = { "InteractionRadius", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, InteractionRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InteractionRadius_MetaData), NewProp_InteractionRadius_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_InteractionSphereRadius = { "InteractionSphereRadius", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, InteractionSphereRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InteractionSphereRadius_MetaData), NewProp_InteractionSphereRadius_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_DeathMontage = { "DeathMontage", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, DeathMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DeathMontage_MetaData), NewProp_DeathMontage_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_HitMontage = { "HitMontage", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, HitMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_HitMontage_MetaData), NewProp_HitMontage_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_ADSMontage = { "ADSMontage", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, ADSMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ADSMontage_MetaData), NewProp_ADSMontage_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_EquippedWeapon = { "EquippedWeapon", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, EquippedWeapon), Z_Construct_UClass_AWeaponBase_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EquippedWeapon_MetaData), NewProp_EquippedWeapon_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_DeltaRotation = { "DeltaRotation", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, DeltaRotation), Z_Construct_UScriptStruct_FRotator, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DeltaRotation_MetaData), NewProp_DeltaRotation_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_MovementSway = { "MovementSway", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMyCharacter, MovementSway), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MovementSway_MetaData), NewProp_MovementSway_MetaData) };
@@ -805,6 +962,9 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMyCharac
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_WeaponToSpawn,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_InteractionRadius,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_InteractionSphereRadius,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_DeathMontage,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_HitMontage,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ADSMontage,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_EquippedWeapon,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_DeltaRotation,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_MovementSway,
@@ -864,10 +1024,10 @@ AMyCharacter::~AMyCharacter() {}
 struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 2908503519U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1133408311U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_4270230665(TEXT("/Script/FPSGame"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_1259550294(TEXT("/Script/FPSGame"),
 	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

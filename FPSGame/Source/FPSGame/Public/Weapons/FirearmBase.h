@@ -7,6 +7,7 @@
 
 #include "FirearmBase.generated.h"
 
+class AFirearmAttachments;
 class AProjectileBase;
 class  USkeletalMeshComponent;
 class UCameraComponent;
@@ -46,49 +47,51 @@ protected:
 #pragma endregion
 
 
-#pragma region CoreVariables
+#pragma region Properties
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	TArray <TEnumAsByte<EObjectTypeQuery>> TraceObjectTypes;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	EWeaponFiringMode WeaponFiringMode = EWeaponFiringMode::Automatic;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	EWeaponFireType WeaponFireType = EWeaponFireType::Trace;
 
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Weapon|Core",
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Weapon",
 		meta = (EditCondition = "WeaponFiringMode == EWeaponFiringMode::Burst",EditConditionHides =true))
 	int32 BurstFireBulletCount =3;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Weapon|Core",
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Weapon",
 		meta = (EditCondition = "WeaponFiringMode == EWeaponFiringMode::Burst",EditConditionHides =true))
 	float BurstFireDelay = 0.1f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Weapon|Core",
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Weapon",
 	meta = (EditCondition = "WeaponFireType == EWeaponFireType::Projectile",EditConditionHides =true))
 	TSubclassOf<AProjectileBase> ProjectileClass;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	float FireRate = 0.25f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	float FireDistance = 7000.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	int32 MaxAmmo = 20;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	float ReloadTime =3.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core",
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon",
 		meta = (EditCondition = "WeaponFireType == EWeaponFireType::Trace",EditConditionHides =true))
 	float WeaponDamage = 25.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core",
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon",
 		meta = (EditCondition = "WeaponFireType == EWeaponFireType::Trace",EditConditionHides =true))
 	float CriticalDamageMultiplier = 2.5f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core",
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon",
 		meta = (EditCondition = "WeaponFireType == EWeaponFireType::Trace",EditConditionHides =true))
 	TSubclassOf<UDamageType> DamageTypeClass;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	FVector2D RecoilYaw ;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	FVector2D RecoilPitch ;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon|Core")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	float MaxPitchMultiplier = 1.5;
+	UPROPERTY(BlueprintReadWrite, Category = "Weapon")
+	TArray<AFirearmAttachments*> FireArmAttachments;
 	
 	int32 BulletsFired = 0;
 	FRotator PreRecoilRotation = FRotator(0.0f);

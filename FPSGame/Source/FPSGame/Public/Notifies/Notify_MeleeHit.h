@@ -24,4 +24,10 @@ protected:
 		const FAnimNotifyEventReference& EventReference) override;
 	
 #pragma endregion
+
+#pragma region Functions
+
+	void ToggleCollision(bool bCollisionState,USkeletalMeshComponent* MeshRef);
+
+#pragma endregion
 };

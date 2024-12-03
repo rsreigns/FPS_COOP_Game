@@ -47,6 +47,8 @@ protected:
 #pragma region CustomFunctions
 public:
 	void ChangeGravDirection(FVector Direction);
+	void PlayMontageOnCharacter(class UAnimMontage* Montage);
+	
 #pragma endregion
 
 #pragma region Inline Functions

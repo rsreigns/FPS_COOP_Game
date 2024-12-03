@@ -5,6 +5,7 @@
 #include "AbilitySystem/BaseAbilitySystemComponent.h"
 #include "FPSGame/DebugHelper.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ABaseCharacter::ABaseCharacter()
 {
@@ -49,4 +50,13 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ABaseCharacter::ChangeGravDirection( FVector Direction)
 {
 	GetCharacterMovement()->SetGravityDirection(Direction);
+}
+
+void ABaseCharacter::PlayMontageOnCharacter(class UAnimMontage* Montage)
+{
+	if (!GetMesh()->GetAnimInstance()) return;
+	if (!Montage) return;
+	if (GetCharacterMovement()->IsFalling()) return;
+	if (GetMesh()->GetAnimInstance()->IsAnyMontagePlaying()) return;
+	PlayAnimMontage(Montage);
 }

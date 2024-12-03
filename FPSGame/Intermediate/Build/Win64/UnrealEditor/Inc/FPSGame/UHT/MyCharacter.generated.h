@@ -11,6 +11,9 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
 class AController;
+class AWeaponBase;
+class UCameraComponent;
+class USpringArmComponent;
 struct FDamageEvent;
 struct FInputActionValue;
 #ifdef FPSGAME_MyCharacter_generated_h
@@ -19,6 +22,9 @@ struct FInputActionValue;
 #define FPSGAME_MyCharacter_generated_h
 
 #define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execGetEquippedWeapon); \
+	DECLARE_FUNCTION(execGetSpringArmComponent); \
+	DECLARE_FUNCTION(execGetCameraComponent); \
 	DECLARE_FUNCTION(execGetLhikTransform); \
 	DECLARE_FUNCTION(execSetCurrentHealth); \
 	DECLARE_FUNCTION(execGetCurrentHealth); \

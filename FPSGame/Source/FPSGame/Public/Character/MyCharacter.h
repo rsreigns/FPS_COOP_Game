@@ -64,40 +64,48 @@ protected:
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentHealth )
 	float CurrentHealth;
 
-	UPROPERTY(EditDefaultsOnly,Category ="ActorCore|Input")
+	UPROPERTY(EditDefaultsOnly,Category ="Player|Input")
 	UInputMappingContext* MappingContext;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Input|Action")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* MoveAction;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Input|Action")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* LookAction;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Input|Action")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* FireAction;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Input|Action")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* JumpAction;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Input|Action")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* ADSAction;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Input|Action")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* InteractAction;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Trace")
+
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Interaction")
 	TArray <TEnumAsByte <EObjectTypeQuery>> TraceObjectTypes;
 
 
-	UPROPERTY(EditDefaultsOnly,Category="ActorCore|Gameplay|Projectile")
+	UPROPERTY(EditDefaultsOnly,Category="Player|Weapon")
 	TSubclassOf<AWeaponBase> WeaponToSpawn;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Gameplay|Interaction")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Interaction")
 	float InteractionRadius=300.f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Gameplay|Interaction")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Interaction")
 	float InteractionSphereRadius = 30.f;
-
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Montages")
+	UAnimMontage* DeathMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Montages")
+	UAnimMontage* HitMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Montages")
+	UAnimMontage* ADSMontage;
+	
 	FViewTargetTransitionParams TransitionParams;
 
 public:
@@ -112,7 +120,8 @@ protected:
 	void OnRep_CurrentHealth();
 
 	void OnHealthUpdate();
-
+#pragma region InputFunctions
+	
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	void HandleMove(const FInputActionValue& Value);
 
@@ -137,13 +146,12 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	void HandleStopInteract();
 
-
+#pragma endregion
+#pragma region CustomFunctions
 	FHitResult DoLineTraceByObject(FVector Start, FVector End, bool ShowDebug=false, bool ForDuration=false,float Duration=2.f);
 	FHitResult DoSphereTraceByObject(FVector Start, FVector End,float TraceRadius = 5.f, bool ShowDebug = false, bool ForDuration = false, float Duration = 2.f);
 	
 	void RegisterCameraComponent();
-	
-
 
 public:	
 
@@ -161,7 +169,8 @@ public:
 	UFUNCTION(BlueprintCallable,BlueprintPure, Category = "LHIK")
 	FTransform GetLhikTransform();
 
-	
+
+#pragma endregion
 
 #pragma region Variables
 	UPROPERTY(BlueprintReadOnly)
@@ -189,8 +198,14 @@ public:
 
 #pragma region InlineFunctions
 
+	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
 	FORCEINLINE  UCameraComponent* GetCameraComponent()const { return CameraComponent; }
+	
+	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
 	FORCEINLINE USpringArmComponent* GetSpringArmComponent() const {return SpringArm;}
+	
+	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
+	FORCEINLINE AWeaponBase* GetEquippedWeapon() const { return EquippedWeapon;}
 	
 #pragma endregion
 };

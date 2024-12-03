@@ -143,8 +143,7 @@ void AMyCharacter::HandleLook(const FInputActionValue& Value)
 	AddControllerPitchInput(LookInput.Y);
 	MouseSwayX = LookInput.X;
 	MouseSwayY = LookInput.Y;
-
-	//PitchValue = GetBaseAimRotation().Pitch - GetActorRotation().Pitch  ;
+	
 }
 
 void AMyCharacter::HandleJump()
@@ -157,6 +156,11 @@ void AMyCharacter::StartFire()
 	if (EquippedWeapon)
 	{
 		EquippedWeapon->StartFireEvent();
+		if (EquippedWeapon->WeaponType == EWeaponType::Melee)
+		{
+			PlayMontageOnCharacter(HitMontage);
+			return;
+		}
 	}
 }
 
@@ -171,7 +175,11 @@ void AMyCharacter::StopFire()
 
 void AMyCharacter::HandleAds()
 {
-	if (EquippedWeapon->WeaponType != EWeaponType::Firearm) return;
+	if (EquippedWeapon->WeaponType == EWeaponType::Melee)
+	{
+		PlayMontageOnCharacter(ADSMontage);
+		return;
+	}
 	if (EquippedWeapon)
 	{
 		if (bIsADS)
