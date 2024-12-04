@@ -7,6 +7,7 @@
 #include "InteractionSystem/NativeInteractionInterface.h"
 #include "MyCharacter.generated.h"
 
+enum class EWeaponSlotType : uint8;
 class UCameraComponent;
 class USpringArmComponent;
 class ATestProjectile;
@@ -15,6 +16,8 @@ class UInputMappingContext;
 class UEnhancedInputComponent;
 struct FHitResult;
 class AWeaponBase;
+class AMeleeBase;
+class AFirearmBase;
 
 UCLASS()
 class FPSGAME_API AMyCharacter : public ABaseCharacter, public INativeInteractionInterface
@@ -58,7 +61,7 @@ protected:
 	UPROPERTY()
 	APlayerController* MyController;
 
-	UPROPERTY(EditDefaultsOnly, Category = "ActorCore|Health")
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Health")
 	float MaxHealth= 100.f;
 
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentHealth )
@@ -93,6 +96,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly,Category="Player|Weapon")
 	TSubclassOf<AWeaponBase> WeaponToSpawn;
+	UPROPERTY(EditDefaultsOnly,Category="Player|Weapon")
+	float WeaponThrowForce = 500.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player|Interaction")
 	float InteractionRadius=300.f;
@@ -111,6 +116,16 @@ protected:
 public:
 	UPROPERTY()
 	AWeaponBase* EquippedWeapon;
+
+	UPROPERTY(BlueprintReadOnly,Category="Player|Weapon")
+	AMeleeBase* MeleeSlotWeapon;
+	UPROPERTY(BlueprintReadOnly,Category="Player|Weapon")
+	AFirearmBase* PrimarySlotWeapon;
+	UPROPERTY(BlueprintReadOnly,Category="Player|Weapon")
+	AFirearmBase* SecondarySlotWeapon;
+	/*UPROPERTY(BlueprintReadOnly,Category="Player|Weapon")
+	class TArray<AThrowableBase*> ThrowableSlotWeapons;*/
+
 #pragma endregion
 
 
@@ -147,21 +162,31 @@ protected:
 	void HandleStopInteract();
 
 #pragma endregion
+	
 #pragma region CustomFunctions
 	FHitResult DoLineTraceByObject(FVector Start, FVector End, bool ShowDebug=false, bool ForDuration=false,float Duration=2.f);
 	FHitResult DoSphereTraceByObject(FVector Start, FVector End,float TraceRadius = 5.f, bool ShowDebug = false, bool ForDuration = false, float Duration = 2.f);
 	
 	void RegisterCameraComponent();
 
-public:	
-
-	void EquipWeapon(TSubclassOf<AWeaponBase> ToEquipWeapon);
+public:
 	
-	UFUNCTION(BlueprintPure, BlueprintCallable,Category = "Health")
-	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
+//   Weapon Equipment System
+	
+	void PickupWeapon(AWeaponBase* ToPickWeapon);
+	void ThrowWeaponFromSlot(EWeaponSlotType WeaponSlotToThrow);
+	
+	void SwitchWeaponSlot(EWeaponSlotType SlotType);
+	void TrySwitchWeapon(AWeaponBase* WeaponToEquip);
+	
+	void AttachToSocket(AWeaponBase* WeaponToAttach,bool bAttachToRestSocket = false);
+	AWeaponBase* DetachWeaponAtSlot(EWeaponSlotType WeaponSlot);
 
-	UFUNCTION(BlueprintPure, BlueprintCallable,Category = "Health")
-	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
+	FName GetSocketNameForWeapon(EWeaponSlotType WeaponSlot,bool bNeedRestSocket = false);
+
+	AWeaponBase* GetWeaponFromSlotType(EWeaponSlotType WeaponSlot);
+	void SetWeaponAtSlot(AWeaponBase* WeaponToSet);
+	void ClearWeaponSlot(EWeaponSlotType SlotType);
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
 	void SetCurrentHealth(float healthValue);
@@ -183,14 +208,11 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	float MouseSwayY;
 	
-
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsADS=false;
 
 	UPROPERTY(BlueprintReadOnly)
 	AActor* InteractingActor;
-
-
 
 #pragma endregion
 
@@ -200,12 +222,26 @@ public:
 
 	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
 	FORCEINLINE  UCameraComponent* GetCameraComponent()const { return CameraComponent; }
-	
 	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
 	FORCEINLINE USpringArmComponent* GetSpringArmComponent() const {return SpringArm;}
 	
 	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
 	FORCEINLINE AWeaponBase* GetEquippedWeapon() const { return EquippedWeapon;}
-	
+	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
+	FORCEINLINE AMeleeBase* GetMeleeSlotWeapon() const { return MeleeSlotWeapon;}
+	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
+	FORCEINLINE AFirearmBase* GetPrimarySlotWeapon() const { return PrimarySlotWeapon;}
+	UFUNCTION(BlueprintCallable,BlueprintPure,Category = "Gameplay")
+	FORCEINLINE AFirearmBase* GetSecondarySlotWeapon() const { return SecondarySlotWeapon;}
+
+	UFUNCTION(BlueprintPure, BlueprintCallable,Category = "Health")
+	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
+
+	UFUNCTION(BlueprintPure, BlueprintCallable,Category = "Health")
+	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
 #pragma endregion
 };
+
+
+
+

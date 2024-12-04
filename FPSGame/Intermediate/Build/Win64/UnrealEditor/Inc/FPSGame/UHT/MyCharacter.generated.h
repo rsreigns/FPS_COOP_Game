@@ -11,6 +11,8 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
 class AController;
+class AFirearmBase;
+class AMeleeBase;
 class AWeaponBase;
 class UCameraComponent;
 class USpringArmComponent;
@@ -21,14 +23,17 @@ struct FInputActionValue;
 #endif
 #define FPSGAME_MyCharacter_generated_h
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execGetCurrentHealth); \
+	DECLARE_FUNCTION(execGetMaxHealth); \
+	DECLARE_FUNCTION(execGetSecondarySlotWeapon); \
+	DECLARE_FUNCTION(execGetPrimarySlotWeapon); \
+	DECLARE_FUNCTION(execGetMeleeSlotWeapon); \
 	DECLARE_FUNCTION(execGetEquippedWeapon); \
 	DECLARE_FUNCTION(execGetSpringArmComponent); \
 	DECLARE_FUNCTION(execGetCameraComponent); \
 	DECLARE_FUNCTION(execGetLhikTransform); \
 	DECLARE_FUNCTION(execSetCurrentHealth); \
-	DECLARE_FUNCTION(execGetCurrentHealth); \
-	DECLARE_FUNCTION(execGetMaxHealth); \
 	DECLARE_FUNCTION(execHandleStopInteract); \
 	DECLARE_FUNCTION(execHandleStartInteract); \
 	DECLARE_FUNCTION(execHandleAds); \
@@ -41,7 +46,7 @@ struct FInputActionValue;
 	DECLARE_FUNCTION(execTakeDamage);
 
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_INCLASS_NO_PURE_DECLS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_25_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMyCharacter(); \
 	friend struct Z_Construct_UClass_AMyCharacter_Statics; \
@@ -57,7 +62,7 @@ public: \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_ENHANCED_CONSTRUCTORS \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_25_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AMyCharacter(AMyCharacter&&); \
@@ -69,13 +74,13 @@ public: \
 	NO_API virtual ~AMyCharacter();
 
 
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_19_PROLOG
-#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_GENERATED_BODY \
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_PROLOG
+#define FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_25_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_INCLASS_NO_PURE_DECLS \
-	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_22_ENHANCED_CONSTRUCTORS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_25_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_25_INCLASS_NO_PURE_DECLS \
+	FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_Character_MyCharacter_h_25_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

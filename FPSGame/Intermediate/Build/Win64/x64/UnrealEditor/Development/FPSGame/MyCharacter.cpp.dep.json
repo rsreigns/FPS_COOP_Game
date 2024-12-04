@@ -65,6 +65,8 @@
             "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystaticstypes.generated.h",
             "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystatics.generated.h",
             "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\public\\weapons\\weaponbase.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\public\\interactionsystem\\baseinteractionactor.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\baseinteractionactor.generated.h",
             "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\weaponbase.generated.h",
             "e:\\ue-5.5\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\kismet\\kismetmathlibrary.h",
             "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\kismetmathlibrary.generated.h",
@@ -89,7 +91,11 @@
             "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\networkpredictioninterface.generated.h",
             "e:\\ue-5.5\\ue_5.5\\engine\\source\\runtime\\engine\\public\\charactermovementcomponentasync.h",
             "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementcomponentasync.generated.h",
-            "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementcomponent.generated.h"
+            "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementcomponent.generated.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\public\\weapons\\meleebase.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\meleebase.generated.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\public\\weapons\\firearmbase.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\intermediate\\build\\win64\\unrealeditor\\inc\\fpsgame\\uht\\firearmbase.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

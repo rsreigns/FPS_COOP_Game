@@ -35,18 +35,22 @@ public:
 
 	AFirearmBase();
 
+#pragma region Overrides
 protected:
 
 	virtual void BeginPlay() override;
 	virtual void Tick( float DeltaSeconds ) override;
+	virtual void PlayerPressedInteract(APawn* PlayerPawn)  override;
+
+#pragma endregion
 #pragma region Components
-	
+public:
 	UPROPERTY(BlueprintReadOnly)
 	UCameraComponent* PlayerCamera;
 
 #pragma endregion
 
-
+protected:
 #pragma region Properties
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
@@ -108,18 +112,13 @@ protected:
 	int32 BurstBulletCounter = 0;
 	
 	FHitResult OutHit;
-	
+public:
 	UPROPERTY()
 	AMyCharacter* OwningPlayer ;
-
+protected:
 	UPROPERTY()
 	FVector MuzzleLocation;
 
-	//UPROPERTY()
-	//FVector ADSLocation;
-
-	//UPROPERTY()
-	//FVector IronSightLocation;
 #pragma endregion
 
 protected:

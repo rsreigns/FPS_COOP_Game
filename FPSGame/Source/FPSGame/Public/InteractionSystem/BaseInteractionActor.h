@@ -10,7 +10,7 @@
 class UWidgetComponent;
 class UUserWidget;
 class USphereComponent;
-class USkeletalMeshComponent;
+//class USkeletalMeshComponent;
 class AWeaponBase;
 
 UENUM(BlueprintType)
@@ -36,8 +36,8 @@ public:
 protected:
 #pragma region Components
 
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category="Interaction|Components")
-	USkeletalMeshComponent* ActorMesh;
+	/*UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category="Interaction|Components")
+	USkeletalMeshComponent* ActorMesh;*/
 	
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Interaction|Components")
 	USphereComponent* SphereOverlapComponent;
@@ -65,7 +65,7 @@ public:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Interaction")
 	EInteractionType InteractionType = EInteractionType::Trigger;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction",
+	UPROPERTY(BlueprintReadOnly, Category = "Interaction",
 		meta = (EditCondition = "InteractionType == EInteractionType::Equipment ",EditConditionHides =true))
 	EEquipmentType EquipmentType = EEquipmentType::InventoryItem;
 	
@@ -75,8 +75,8 @@ public:
 			EditConditionHides =true))
 	TSubclassOf<AWeaponBase> WeaponClass;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
-	TArray<AActor*> OverlappingActors;
+	/*UPROPERTY(BlueprintReadOnly, Category = "Interaction")
+	TArray<AActor*> OverlappingActors;*/
 	
 #pragma endregion
 

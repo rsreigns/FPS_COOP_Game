@@ -15,7 +15,6 @@ COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_AActor();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent_NoRegister();
-ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USphereComponent_NoRegister();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
 FPSGAME_API UClass* Z_Construct_UClass_ABaseInteractionActor();
@@ -298,15 +297,16 @@ struct Z_Construct_UClass_ABaseInteractionActor_Statics
 		{ "IncludePath", "InteractionSystem/BaseInteractionActor.h" },
 		{ "ModuleRelativePath", "Public/InteractionSystem/BaseInteractionActor.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ActorMesh_MetaData[] = {
-		{ "Category", "Interaction|Components" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/InteractionSystem/BaseInteractionActor.h" },
-	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SphereOverlapComponent_MetaData[] = {
 		{ "Category", "Interaction|Components" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/*UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category=\"Interaction|Components\")\n\x09USkeletalMeshComponent* ActorMesh;*/" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/InteractionSystem/BaseInteractionActor.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category=\"Interaction|Components\")\n       USkeletalMeshComponent* ActorMesh;" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WidgetComponent_MetaData[] = {
 		{ "Category", "Interaction|Components" },
@@ -329,12 +329,7 @@ struct Z_Construct_UClass_ABaseInteractionActor_Statics
 		{ "EditConditionHides", "TRUE" },
 		{ "ModuleRelativePath", "Public/InteractionSystem/BaseInteractionActor.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OverlappingActors_MetaData[] = {
-		{ "Category", "Interaction" },
-		{ "ModuleRelativePath", "Public/InteractionSystem/BaseInteractionActor.h" },
-	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_ActorMesh;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SphereOverlapComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_WidgetComponent;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_InteractionType_Underlying;
@@ -342,8 +337,6 @@ struct Z_Construct_UClass_ABaseInteractionActor_Statics
 	static const UECodeGen_Private::FBytePropertyParams NewProp_EquipmentType_Underlying;
 	static const UECodeGen_Private::FEnumPropertyParams NewProp_EquipmentType;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_WeaponClass;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_OverlappingActors_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_OverlappingActors;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -357,18 +350,14 @@ struct Z_Construct_UClass_ABaseInteractionActor_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_ActorMesh = { "ActorMesh", nullptr, (EPropertyFlags)0x002008000009001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, ActorMesh), Z_Construct_UClass_USkeletalMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ActorMesh_MetaData), NewProp_ActorMesh_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_SphereOverlapComponent = { "SphereOverlapComponent", nullptr, (EPropertyFlags)0x002008000009001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, SphereOverlapComponent), Z_Construct_UClass_USphereComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SphereOverlapComponent_MetaData), NewProp_SphereOverlapComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_WidgetComponent = { "WidgetComponent", nullptr, (EPropertyFlags)0x002008000009001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, WidgetComponent), Z_Construct_UClass_UWidgetComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WidgetComponent_MetaData), NewProp_WidgetComponent_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_InteractionType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_InteractionType = { "InteractionType", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, InteractionType), Z_Construct_UEnum_FPSGame_EInteractionType, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InteractionType_MetaData), NewProp_InteractionType_MetaData) }; // 256735114
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_EquipmentType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_EquipmentType = { "EquipmentType", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, EquipmentType), Z_Construct_UEnum_FPSGame_EEquipmentType, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EquipmentType_MetaData), NewProp_EquipmentType_MetaData) }; // 3940067518
+const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_EquipmentType = { "EquipmentType", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, EquipmentType), Z_Construct_UEnum_FPSGame_EEquipmentType, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EquipmentType_MetaData), NewProp_EquipmentType_MetaData) }; // 3940067518
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_WeaponClass = { "WeaponClass", nullptr, (EPropertyFlags)0x0014000000010015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, WeaponClass), Z_Construct_UClass_UClass, Z_Construct_UClass_AWeaponBase_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponClass_MetaData), NewProp_WeaponClass_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_OverlappingActors_Inner = { "OverlappingActors", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_OverlappingActors = { "OverlappingActors", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseInteractionActor, OverlappingActors), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OverlappingActors_MetaData), NewProp_OverlappingActors_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseInteractionActor_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_ActorMesh,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_SphereOverlapComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_WidgetComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_InteractionType_Underlying,
@@ -376,8 +365,6 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseInte
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_EquipmentType_Underlying,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_EquipmentType,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_WeaponClass,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_OverlappingActors_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseInteractionActor_Statics::NewProp_OverlappingActors,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ABaseInteractionActor_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ABaseInteractionActor_Statics::DependentSingletons[])() = {
@@ -427,10 +414,10 @@ struct Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPS
 		{ EEquipmentType_StaticEnum, TEXT("EEquipmentType"), &Z_Registration_Info_UEnum_EEquipmentType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3940067518U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ABaseInteractionActor, ABaseInteractionActor::StaticClass, TEXT("ABaseInteractionActor"), &Z_Registration_Info_UClass_ABaseInteractionActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseInteractionActor), 3051046315U) },
+		{ Z_Construct_UClass_ABaseInteractionActor, ABaseInteractionActor::StaticClass, TEXT("ABaseInteractionActor"), &Z_Registration_Info_UClass_ABaseInteractionActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseInteractionActor), 2497515368U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_3106057752(TEXT("/Script/FPSGame"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_3844033069(TEXT("/Script/FPSGame"),
 	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_Statics::ClassInfo),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unreal_project_FPS_COOP_Game_FPSGame_Source_FPSGame_Public_InteractionSystem_BaseInteractionActor_h_Statics::EnumInfo));

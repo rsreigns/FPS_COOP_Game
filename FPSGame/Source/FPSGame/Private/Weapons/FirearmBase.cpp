@@ -16,19 +16,13 @@ AFirearmBase::AFirearmBase()
 {
 	/*WeaponMesh = CreateDefaultSubobject< USkeletalMeshComponent>(TEXT("WeaponSKM"));*/
 	WeaponType = EWeaponType::Firearm;
+	WeaponSlotType = EWeaponSlotType::Primary;
 }
 
 void AFirearmBase::BeginPlay()
 {
 	Super::BeginPlay();
-	if(GetOwner())
-	{
-		OwningPlayer = Cast<AMyCharacter>(GetOwner());
-		if(OwningPlayer)
-		{
-			PlayerCamera = OwningPlayer->GetCameraComponent();
-		}
-	}
+
 	CurrentAmmo = MaxAmmo;
 }
 
@@ -41,12 +35,26 @@ void AFirearmBase::Tick(float DeltaSeconds)
 	}
 }
 
+void AFirearmBase::PlayerPressedInteract(APawn* PlayerPawn)
+{
+	Super::PlayerPressedInteract(PlayerPawn);
+	if(PlayerPawn)
+	{
+		OwningPlayer = Cast<AMyCharacter>(PlayerPawn);
+		if(OwningPlayer)
+		{
+			PlayerCamera = OwningPlayer->GetCameraComponent();
+			DEBUG::PrintString("Player and camera was set");
+		}
+	}
+}
+
 
 void AFirearmBase::StartFireEvent()
 {
 	Super::StartFireEvent();
 	bIsResettingRecoilRotation = false;
-	PreRecoilRotation = OwningPlayer->GetControlRotation();
+	if (OwningPlayer)PreRecoilRotation = OwningPlayer->GetControlRotation();
 	if (GetIsReloading()) return;
 	
 	FirstFireDelay = FMath::Max(LastFiredTime + FireRate - GetWorld()->TimeSeconds, 0.f);

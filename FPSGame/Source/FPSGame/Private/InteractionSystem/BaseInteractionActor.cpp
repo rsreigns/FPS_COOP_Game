@@ -21,23 +21,24 @@ ABaseInteractionActor::ABaseInteractionActor()
 	SphereOverlapComponent->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnBeginOverlap);
 	SphereOverlapComponent->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::OnEndOverlap);
 	SphereOverlapComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	SphereOverlapComponent->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
 	SphereOverlapComponent->SetSphereRadius(120.f, true);
 	SphereOverlapComponent->SetupAttachment(RootComponent);
 
-	ActorMesh = CreateDefaultSubobject<USkeletalMeshComponent>("ActorMesh");
-	ActorMesh->SetupAttachment(SphereOverlapComponent);
+	/*ActorMesh = CreateDefaultSubobject<USkeletalMeshComponent>("ActorMesh");
+	ActorMesh->SetupAttachment(SphereOverlapComponent);*/
 
 	WidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractionWidget"));
-	WidgetComponent->SetupAttachment(ActorMesh);
-
-
 }
 
 
 void ABaseInteractionActor::BeginPlay()
 {
 	Super::BeginPlay();
-
+	if (WidgetComponent && WidgetComponent->GetWidget())
+	{
+		WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::Collapsed);
+	}
 }
 
 void ABaseInteractionActor::PlayerPressedInteract(APawn* PlayerPawn) 
@@ -47,11 +48,11 @@ void ABaseInteractionActor::PlayerPressedInteract(APawn* PlayerPawn)
 	{
 		if (EquipmentType == EEquipmentType::Weapon)
 		{
-			if (AMyCharacter* MyCharacter = Cast<AMyCharacter>(PlayerPawn))
+			/*if (AMyCharacter* MyCharacter = Cast<AMyCharacter>(PlayerPawn))
 			{
-				MyCharacter->EquipWeapon(WeaponClass);
-				Destroy();
-			}
+				/*MyCharacter->EquipWeapon(WeaponClass);
+				Destroy();#1#
+			}*/
 		}
 	}
 }
@@ -74,8 +75,10 @@ void ABaseInteractionActor::OnBeginOverlap(UPrimitiveComponent* OverlappedCompon
 {
 	if (Cast<APawn>(OtherActor))
 	{
-		WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-		OverlappingActors.AddUnique(OtherActor);
+		if (WidgetComponent && WidgetComponent->GetWidget())
+		{
+			WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+		}
 	}
 }
 
@@ -89,7 +92,7 @@ void ABaseInteractionActor::OnEndOverlap(UPrimitiveComponent* OverlappedComponen
 			{
 				WidgetComponent->GetWidget()->SetVisibility(ESlateVisibility::Collapsed);
 			}
-			OverlappingActors.Remove(OtherActor);
+			//OverlappingActors.Remove(OtherActor);
 		}
 	}
 

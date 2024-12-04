@@ -11,6 +11,7 @@ AMeleeBase::AMeleeBase()
 	BoxOverlap = CreateDefaultSubobject<UBoxComponent>("Box Overlap");
 	BoxOverlap->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	BoxOverlap->SetCollisionResponseToAllChannels(ECR_Overlap);
+	BoxOverlap->SetupAttachment(GetWeaponMesh());
 }
 
 void AMeleeBase::StartFireEvent()

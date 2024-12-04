@@ -123,6 +123,12 @@
     <ClCompile Include="..\..\Source\FPSGame\Private\InteractionSystem\NativeInteractionInterface.cpp">
       <Filter>Source\FPSGame\Private\InteractionSystem</Filter>
     </ClCompile>
+    <Filter Include="Source\FPSGame\Private\Notifies">
+      <UniqueIdentifier>{49551F12-A069-394A-B928-E0614864201B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Notifies\Notify_MeleeHit.cpp">
+      <Filter>Source\FPSGame\Private\Notifies</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Private\StartupData">
       <UniqueIdentifier>{FCF05F3B-722F-3CD3-B8A6-92F8FC41192E}</UniqueIdentifier>
     </Filter>
@@ -141,7 +147,13 @@
     <Filter Include="Source\FPSGame\Private\Weapons">
       <UniqueIdentifier>{A13EF8E0-96BA-39CA-B937-6D81422ED19C}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\FirearmAttachments.cpp">
+      <Filter>Source\FPSGame\Private\Weapons</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\FirearmBase.cpp">
+      <Filter>Source\FPSGame\Private\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\MeleeBase.cpp">
       <Filter>Source\FPSGame\Private\Weapons</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Private\Weapons\WeaponBase.cpp">
@@ -219,6 +231,12 @@
     <ClCompile Include="..\..\Source\FPSGame\Public\InteractionSystem\NativeInteractionInterface.h">
       <Filter>Source\FPSGame\Public\InteractionSystem</Filter>
     </ClCompile>
+    <Filter Include="Source\FPSGame\Public\Notifies">
+      <UniqueIdentifier>{837C92EA-5B32-3F15-8A60-57AF2DB61000}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Notifies\Notify_MeleeHit.h">
+      <Filter>Source\FPSGame\Public\Notifies</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSGame\Public\StartupData">
       <UniqueIdentifier>{37DFA53E-4CED-39E8-91FD-8D62CAD38A79}</UniqueIdentifier>
     </Filter>
@@ -237,7 +255,13 @@
     <Filter Include="Source\FPSGame\Public\Weapons">
       <UniqueIdentifier>{57749C17-1481-39A8-A354-94526B1C0DF6}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\FirearmAttachments.h">
+      <Filter>Source\FPSGame\Public\Weapons</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\FirearmBase.h">
+      <Filter>Source\FPSGame\Public\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\MeleeBase.h">
       <Filter>Source\FPSGame\Public\Weapons</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSGame\Public\Weapons\WeaponBase.h">

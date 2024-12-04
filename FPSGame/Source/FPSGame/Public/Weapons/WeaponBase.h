@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+//#include "GameFramework/Actor.h"
+#include "InteractionSystem/BaseInteractionActor.h"
 #include "WeaponBase.generated.h"
 
 UENUM(BlueprintType)
@@ -11,9 +12,14 @@ enum class EWeaponType : uint8
 {
 	Firearm, Melee
 };
+UENUM(BlueprintType)
+enum class EWeaponSlotType: uint8
+{
+	Melee,Primary,Secondary,Throwable
+};
 
 UCLASS()
-class FPSGAME_API AWeaponBase : public AActor
+class FPSGAME_API AWeaponBase : public ABaseInteractionActor
 {
 	GENERATED_BODY()
 	
@@ -35,12 +41,17 @@ protected:
 public:	
 
 	virtual void Tick(float DeltaTime) override;
+	virtual void PlayerPressedInteract(APawn* PlayerPawn)  override;
+	virtual void PlayerReleasedInteract(APawn* PlayerPawn)  override;
 #pragma endregion
 
 #pragma region Variables
 
 	UPROPERTY(BlueprintReadOnly, Category = "Weapon")
 	EWeaponType WeaponType = EWeaponType::Firearm;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category = "Weapon")
+	EWeaponSlotType WeaponSlotType = EWeaponSlotType::Melee;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Weapon")
 	USoundBase* HitSound;
@@ -54,6 +65,8 @@ public:
 	virtual void StartFireEvent();
 	virtual void StopFireEvent();
 	virtual void StartAds();
+
+	void EnablePawnCollision(bool bShouldEnable);
 	
 #pragma endregion
 	
@@ -65,3 +78,5 @@ public:
 #pragma endregion
 
 };
+
+
