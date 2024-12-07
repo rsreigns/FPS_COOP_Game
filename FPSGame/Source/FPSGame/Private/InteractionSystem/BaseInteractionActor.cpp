@@ -6,6 +6,7 @@
 #include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "Character/MyCharacter.h"
+#include "Components/BoxComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 
 #include "FPSGame/DebugHelper.h"
@@ -16,19 +17,20 @@ ABaseInteractionActor::ABaseInteractionActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	SphereOverlapComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereOverlapComponent"));
-	SphereOverlapComponent->SetGenerateOverlapEvents(true);
-	SphereOverlapComponent->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnBeginOverlap);
-	SphereOverlapComponent->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::OnEndOverlap);
-	SphereOverlapComponent->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-	SphereOverlapComponent->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
-	SphereOverlapComponent->SetSphereRadius(120.f, true);
-	SphereOverlapComponent->SetupAttachment(RootComponent);
-
-	/*ActorMesh = CreateDefaultSubobject<USkeletalMeshComponent>("ActorMesh");
-	ActorMesh->SetupAttachment(SphereOverlapComponent);*/
+	WidgetSwitcherOverlap = CreateDefaultSubobject<USphereComponent>(TEXT("SphereOverlapComponent"));
+	WidgetSwitcherOverlap->SetGenerateOverlapEvents(true);
+	WidgetSwitcherOverlap->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnBeginOverlap);
+	WidgetSwitcherOverlap->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::OnEndOverlap);
+	WidgetSwitcherOverlap->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	WidgetSwitcherOverlap->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
+	WidgetSwitcherOverlap->SetSphereRadius(120.f, true);
+	WidgetSwitcherOverlap->SetupAttachment(RootComponent);
 
 	WidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractionWidget"));
+
+	InteractionHelper = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxOverlapComponent"));
+	InteractionHelper->SetCollisionResponseToAllChannels(ECR_Ignore);
+	InteractionHelper->SetCollisionResponseToChannel(ECC_GameTraceChannel2,ECR_Block);
 }
 
 

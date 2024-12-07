@@ -33,6 +33,8 @@ AMyCharacter::AMyCharacter()
 	MyInputComponent = CreateDefaultSubobject<UEnhancedInputComponent>(TEXT("InputComponent"));
 
 	CurrentHealth = MaxHealth;
+
+	EquippedWeaponSlotType = EWeaponSlotType::Unarmed;
 }
 
 #pragma region OverridenFunctions
@@ -72,13 +74,26 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	MyInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::HandleMove);
 	MyInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ThisClass::HandleLook);
+	
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ThisClass::StartFire);
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &ThisClass::StopFire);
 	MyInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ThisClass::HandleJump);
+	
 	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Started, this, &ThisClass::HandleAds);
 	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Completed, this, &ThisClass::HandleAds);
+	
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ThisClass::HandleStartInteract);
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Completed, this, &ThisClass::HandleStopInteract);
+
+	MyInputComponent->BindAction(PrimaryWeaponAction, ETriggerEvent::Started, this, &ThisClass::SwitchToPrimaryWeapon);
+
+	MyInputComponent->BindAction(SecondaryWeaponAction, ETriggerEvent::Started, this, &ThisClass::SwitchToSecondaryWeapon);
+
+	MyInputComponent->BindAction(MeleeWeaponAction, ETriggerEvent::Started, this, &ThisClass::SwitchToMeleeWeapon);
+
+	MyInputComponent->BindAction(ThrowableWeaponAction, ETriggerEvent::Started, this, &ThisClass::SwitchToThrowableWeapon);
+
+	MyInputComponent->BindAction(DropWeaponAction, ETriggerEvent::Started, this, &ThisClass::DropCurrentWeapon);
 }
 
 
@@ -170,6 +185,7 @@ void AMyCharacter::StopFire()
 
 void AMyCharacter::HandleAds()
 {
+	if (!EquippedWeapon) return;
 	if (EquippedWeapon->WeaponType == EWeaponType::Melee)
 	{
 		PlayMontageOnCharacter(ADSMontage);
@@ -210,11 +226,16 @@ void AMyCharacter::HandleStartInteract()
 		UNativeInteractionInterface::StaticClass()))
 	{
 		InteractingActor = OutHit.GetActor();
+
+		DEBUG::PrintString(FString::Printf(TEXT("%s has been interacted "),
+			*OutHit.GetActor()->GetName()),5.f,FColor::Magenta);
+		
 		if (INativeInteractionInterface* InteractInterface = Cast<INativeInteractionInterface>(OutHit.GetActor()))
 		{
 			if (AWeaponBase* WeaponToEquip = Cast<AWeaponBase>(InteractingActor))
 			{
-				PickupWeapon(WeaponToEquip);//shouldn't spawn!
+				PickupWeapon(WeaponToEquip);
+				WeaponToEquip->EnablePawnCollision(false);
 				if (AFirearmBase* FireArm = Cast<AFirearmBase>(InteractingActor))
 				{
 					FireArm->OwningPlayer = this;
@@ -241,6 +262,33 @@ void AMyCharacter::HandleStopInteract()
 		}
 		InteractingActor = nullptr;
 	}
+}
+
+void AMyCharacter::SwitchToPrimaryWeapon()
+{
+	SwitchWeaponSlot(EWeaponSlotType::Primary);
+	DEBUG::PrintString("Switching to primary action");
+}
+
+void AMyCharacter::SwitchToSecondaryWeapon()
+{
+	SwitchWeaponSlot(EWeaponSlotType::Secondary);
+}
+
+void AMyCharacter::SwitchToMeleeWeapon()
+{
+	SwitchWeaponSlot(EWeaponSlotType::Melee);
+	DEBUG::PrintString("Switching to melee action");
+}
+
+void AMyCharacter::SwitchToThrowableWeapon()
+{
+	SwitchWeaponSlot(EWeaponSlotType::Throwable);
+}
+
+void AMyCharacter::DropCurrentWeapon()
+{
+	ThrowWeaponFromSlot(EquippedWeaponSlotType);
 }
 
 
@@ -301,23 +349,37 @@ void AMyCharacter::PickupWeapon(AWeaponBase* ToPickWeapon)
 {
 	if (!ToPickWeapon) return;
 	
-	EWeaponSlotType SlotToEquipAt = ToPickWeapon->WeaponSlotType;
+	const EWeaponSlotType SlotToEquipAt = ToPickWeapon->WeaponSlotType;
+	
 	bool bWasEquippedWeapon = false;
-	if (AWeaponBase* WeaponAlreadyAtSlot = GetWeaponFromSlotType(SlotToEquipAt))
-	// Check if there' already a weapon at that slot
+	
+	if (const AWeaponBase* WeaponAlreadyAtSlot = GetWeaponFromSlotType(SlotToEquipAt))
 	{
-		if (WeaponAlreadyAtSlot == EquippedWeapon) bWasEquippedWeapon = true;
+		if (WeaponAlreadyAtSlot == EquippedWeapon)
+		{
+			bWasEquippedWeapon = true;
+		}
 		ThrowWeaponFromSlot(SlotToEquipAt);
 	}
-	AttachToSocket(ToPickWeapon);
+
+	bool bShouldEquipAsCurrentWeapon = bWasEquippedWeapon || !EquippedWeapon;
+	
+	AttachToSocket(ToPickWeapon,!bShouldEquipAsCurrentWeapon);
 	SetWeaponAtSlot(ToPickWeapon);
-	if (bWasEquippedWeapon || !EquippedWeapon) EquippedWeapon = ToPickWeapon;
+	
+	if (bShouldEquipAsCurrentWeapon)
+	{
+		EquippedWeapon = ToPickWeapon;
+	}
+		
+	EquippedWeaponSlotType = GetEquippedWeapon()->WeaponSlotType;
 }
 
 FName AMyCharacter::GetSocketNameForWeapon(EWeaponSlotType WeaponSlot, bool bNeedRestSocket)
 {
 	switch (WeaponSlot)
 	{
+	case EWeaponSlotType::Unarmed: return FName();
 	case EWeaponSlotType::Melee: return bNeedRestSocket ? FName("MeleeRestSocket") : FName("MeleeSocket");
 	case EWeaponSlotType::Primary: return bNeedRestSocket ? FName("PrimaryRestSocket") : FName("PrimarySocket");
 	case EWeaponSlotType::Secondary: return bNeedRestSocket ? FName("SecondaryRestSocket") : FName("SecondarySocket");
@@ -335,11 +397,18 @@ void AMyCharacter::ThrowWeaponFromSlot(EWeaponSlotType WeaponSlotToThrow)
 	{
 		WeaponMeshComp->AddForce(WeaponThrowForce * GetActorForwardVector());
 	}
-	ClearWeaponSlot(GetEquippedWeapon()->WeaponSlotType);
+	ClearWeaponSlot(WeaponSlotToThrow);
+	if (WeaponSlotToThrow == EquippedWeaponSlotType)
+	{
+		EquippedWeapon = nullptr;
+		EquippedWeaponSlotType = EWeaponSlotType::Unarmed;
+	}
+	
 	if (AFirearmBase* FireArm = Cast<AFirearmBase>(InteractingActor))
 	{
 		FireArm->OwningPlayer = nullptr;
 		FireArm->PlayerCamera = nullptr;
+		
 	}
 }
 
@@ -358,6 +427,7 @@ void AMyCharacter::ClearWeaponSlot(EWeaponSlotType SlotType)
 		UE_LOG(LogTemp, Warning, TEXT("Unknown Weapon Slot Type"));
 		break;
 	}
+	EquippedWeaponSlotType = EWeaponSlotType::Unarmed;
 }
 
 void AMyCharacter::SwitchWeaponSlot(EWeaponSlotType SlotType)
@@ -379,18 +449,34 @@ void AMyCharacter::SwitchWeaponSlot(EWeaponSlotType SlotType)
 
 void AMyCharacter::TrySwitchWeapon(AWeaponBase* WeaponToEquip)
 {
-	if (!WeaponToEquip)return;
-	if (WeaponToEquip->WeaponSlotType == GetEquippedWeapon()->WeaponSlotType) return;
+	if (!WeaponToEquip)
+	{
+		DEBUG::PrintString("Invalid weapon to equpip");
+		return;
+	}
+
 	if (EquippedWeapon)
 	{
-		EWeaponSlotType CurrentWeaponSlotType = EquippedWeapon->WeaponSlotType;
+		if (WeaponToEquip->WeaponSlotType == GetEquippedWeapon()->WeaponSlotType)
+		{
+			DEBUG::PrintString("Already Equipping this weapon");
+			return;
+		}
+		
+		const EWeaponSlotType CurrentWeaponSlotType = EquippedWeapon->WeaponSlotType;
+		
 		DetachWeaponAtSlot(CurrentWeaponSlotType);
 		AttachToSocket(EquippedWeapon, true);
+		
+		DEBUG::PrintString("detached equipped weapon");
 	}
-	EWeaponSlotType WeaponToEquipSlotType = WeaponToEquip->WeaponSlotType;
+	const EWeaponSlotType WeaponToEquipSlotType = WeaponToEquip->WeaponSlotType;
 	DetachWeaponAtSlot(WeaponToEquipSlotType);
 	AttachToSocket(WeaponToEquip, false);
 	EquippedWeapon = WeaponToEquip;
+
+	EquippedWeaponSlotType = GetEquippedWeapon()->WeaponSlotType;
+	DEBUG::PrintString("Switch weapon end statement");
 }
 
 void AMyCharacter::AttachToSocket(AWeaponBase* WeaponToAttach, bool bAttachToRestSocket)
@@ -421,6 +507,7 @@ AWeaponBase* AMyCharacter::GetWeaponFromSlotType(EWeaponSlotType WeaponSlot) // 
 {
 	switch (WeaponSlot)
 	{
+	case EWeaponSlotType::Unarmed : return nullptr;
 	case EWeaponSlotType::Melee: return GetMeleeSlotWeapon();
 	case EWeaponSlotType::Primary: return GetPrimarySlotWeapon();
 	case EWeaponSlotType::Secondary: return GetSecondarySlotWeapon();
@@ -432,9 +519,10 @@ AWeaponBase* AMyCharacter::GetWeaponFromSlotType(EWeaponSlotType WeaponSlot) // 
 void AMyCharacter::SetWeaponAtSlot(AWeaponBase* WeaponToSet)
 {
 	if (!WeaponToSet) return;
-	EWeaponSlotType WeaponSlot = WeaponToSet->WeaponSlotType;
+	const EWeaponSlotType WeaponSlot = WeaponToSet->WeaponSlotType;
 	switch (WeaponSlot)
 	{
+	case EWeaponSlotType::Unarmed : return;
 	case EWeaponSlotType::Melee: MeleeSlotWeapon = Cast<AMeleeBase>(WeaponToSet);
 		break;
 	case EWeaponSlotType::Primary: PrimarySlotWeapon = Cast<AFirearmBase>(WeaponToSet);

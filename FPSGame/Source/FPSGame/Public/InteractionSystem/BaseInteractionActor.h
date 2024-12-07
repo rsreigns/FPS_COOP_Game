@@ -10,7 +10,7 @@
 class UWidgetComponent;
 class UUserWidget;
 class USphereComponent;
-//class USkeletalMeshComponent;
+class UBoxComponent;
 class AWeaponBase;
 
 UENUM(BlueprintType)
@@ -40,10 +40,13 @@ protected:
 	USkeletalMeshComponent* ActorMesh;*/
 	
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Interaction|Components")
-	USphereComponent* SphereOverlapComponent;
+	USphereComponent* WidgetSwitcherOverlap;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,  Category = "Interaction|Components")
 	UWidgetComponent* WidgetComponent;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Interaction|Components")
+	UBoxComponent* InteractionHelper;
 
 
 

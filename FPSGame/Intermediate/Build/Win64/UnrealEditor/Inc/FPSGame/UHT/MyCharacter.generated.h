@@ -34,6 +34,11 @@ struct FInputActionValue;
 	DECLARE_FUNCTION(execGetCameraComponent); \
 	DECLARE_FUNCTION(execGetLhikTransform); \
 	DECLARE_FUNCTION(execSetCurrentHealth); \
+	DECLARE_FUNCTION(execDropCurrentWeapon); \
+	DECLARE_FUNCTION(execSwitchToThrowableWeapon); \
+	DECLARE_FUNCTION(execSwitchToMeleeWeapon); \
+	DECLARE_FUNCTION(execSwitchToSecondaryWeapon); \
+	DECLARE_FUNCTION(execSwitchToPrimaryWeapon); \
 	DECLARE_FUNCTION(execHandleStopInteract); \
 	DECLARE_FUNCTION(execHandleStartInteract); \
 	DECLARE_FUNCTION(execHandleAds); \

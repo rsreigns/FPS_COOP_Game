@@ -38,3 +38,5 @@
 #include "E:/unreal project/FPS_COOP_Game/FPSGame/Source/FPSGame/Private/StartupData/PlayerBaseStartupData.cpp"
 #include "E:/unreal project/FPS_COOP_Game/FPSGame/Source/FPSGame/Private/UI/MyHUD.cpp"
 #include "E:/unreal project/FPS_COOP_Game/FPSGame/Source/FPSGame/Private/Weapons/FirearmAttachments.cpp"
+#include "E:/unreal project/FPS_COOP_Game/FPSGame/Source/FPSGame/Private/Weapons/FirearmBase.cpp"
+#include "E:/unreal project/FPS_COOP_Game/FPSGame/Source/FPSGame/Private/Weapons/MeleeBase.cpp"

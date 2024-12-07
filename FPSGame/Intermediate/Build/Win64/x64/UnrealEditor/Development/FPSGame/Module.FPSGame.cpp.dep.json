@@ -246,7 +246,11 @@
             "e:\\ue-5.5\\ue_5.5\\engine\\source\\runtime\\umg\\public\\animation\\widgetanimationevents.h",
             "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\widgetanimationevents.generated.h",
             "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\userwidget.generated.h",
-            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\private\\weapons\\firearmattachments.cpp"
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\private\\weapons\\firearmattachments.cpp",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\private\\weapons\\firearmbase.cpp",
+            "e:\\ue-5.5\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\camera\\cameracomponent.h",
+            "e:\\ue-5.5\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\cameracomponent.generated.h",
+            "e:\\unreal project\\fps_coop_game\\fpsgame\\source\\fpsgame\\private\\weapons\\meleebase.cpp"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

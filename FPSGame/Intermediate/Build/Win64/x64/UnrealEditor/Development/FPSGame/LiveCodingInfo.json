@@ -41,14 +41,14 @@
 			"PlayerBaseStartupData.cpp.obj",
 			"MyHUD.cpp.obj",
 			"FirearmAttachments.cpp.obj",
+			"FirearmBase.cpp.obj",
+			"MeleeBase.cpp.obj",
 			"BaseInteractionActor.gen.cpp.obj",
 			"FPSGame.init.gen.cpp.obj",
 			"MyCharacter.gen.cpp.obj",
 			"WeaponBase.gen.cpp.obj",
 			"MyCharacter.cpp.obj",
 			"BaseInteractionActor.cpp.obj",
-			"FirearmBase.cpp.obj",
-			"MeleeBase.cpp.obj",
 			"WeaponBase.cpp.obj"
 		]
 	}

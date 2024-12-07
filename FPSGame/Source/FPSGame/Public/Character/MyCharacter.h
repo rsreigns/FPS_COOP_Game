@@ -88,6 +88,21 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* InteractAction;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
+	const UInputAction* PrimaryWeaponAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
+	const UInputAction* SecondaryWeaponAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
+	const UInputAction* MeleeWeaponAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
+	const UInputAction* ThrowableWeaponAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
+	const UInputAction* DropWeaponAction;
+
 
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Player|Interaction")
@@ -97,7 +112,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly,Category="Player|Weapon")
 	TSubclassOf<AWeaponBase> WeaponToSpawn;
 	UPROPERTY(EditDefaultsOnly,Category="Player|Weapon")
-	float WeaponThrowForce = 500.f;
+	float WeaponThrowForce = 2000.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player|Interaction")
 	float InteractionRadius=300.f;
@@ -116,6 +131,8 @@ protected:
 public:
 	UPROPERTY()
 	AWeaponBase* EquippedWeapon;
+	UPROPERTY(BlueprintReadOnly,Category="Player|Weapon")
+	EWeaponSlotType EquippedWeaponSlotType;
 
 	UPROPERTY(BlueprintReadOnly,Category="Player|Weapon")
 	AMeleeBase* MeleeSlotWeapon;
@@ -160,6 +177,21 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	void HandleStopInteract();
+
+	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	void SwitchToPrimaryWeapon();
+
+	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	void SwitchToSecondaryWeapon();
+
+	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	void SwitchToMeleeWeapon();
+
+	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	void SwitchToThrowableWeapon();
+
+	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	void DropCurrentWeapon();
 
 #pragma endregion
 	

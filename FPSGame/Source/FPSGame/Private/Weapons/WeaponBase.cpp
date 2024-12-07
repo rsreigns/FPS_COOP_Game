@@ -1,18 +1,26 @@
 
 #include "Weapons/WeaponBase.h"
 
+#include "Components/BoxComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
+#include "FPSGame/DebugHelper.h"
 
 
 AWeaponBase::AWeaponBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon Mesh");
-	WeaponMesh->SetupAttachment(SphereOverlapComponent);
+	WeaponMesh->SetupAttachment(WidgetSwitcherOverlap);
+	WeaponMesh->SetCollisionObjectType(ECC_PhysicsBody);
+	
+	WidgetComponent->SetupAttachment(WeaponMesh);
+
+	InteractionHelper->SetupAttachment(WeaponMesh);
+	
 	EquipmentType = EEquipmentType::Weapon;
 
-	WidgetComponent->SetupAttachment(WeaponMesh);
 }
 
 
@@ -23,6 +31,8 @@ void AWeaponBase::BeginPlay()
 	{
 		EnablePawnCollision(false);
 	}
+	ReceiveBeginPlay();
+	
 }
 
 
@@ -59,11 +69,30 @@ void AWeaponBase::EnablePawnCollision(bool bShouldEnable)
 {
 	if (bShouldEnable)
 	{
-		GetWeaponMesh()->SetSimulatePhysics(true);
-		SphereOverlapComponent->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
+		SetActorEnableCollision(true);
+		
+		/*WeaponMesh->SetCollisionObjectType(ECC_PhysicsBody);
+		WeaponMesh->SetSimulatePhysics(true);
+		WeaponMesh->SetAllBodiesSimulatePhysics(true);
+		WeaponMesh->SetAllBodiesBelowSimulatePhysics(WeaponMesh->GetBoneName(0), true);*/
+		
+		WidgetSwitcherOverlap->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
+		InteractionHelper->SetCollisionResponseToChannel(ECC_GameTraceChannel2,ECR_Block);
+		
+		DEBUG::PrintString("Enabled collision on weapon");
+		
 		return;
 	}
-	GetWeaponMesh()->SetSimulatePhysics(false);
-	SphereOverlapComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+
+	SetActorEnableCollision(false);
+	
+	/*WeaponMesh->SetCollisionObjectType(ECC_WorldStatic);
+	WeaponMesh->SetSimulatePhysics(false);
+	WeaponMesh->SetAllBodiesSimulatePhysics(false);
+	WeaponMesh->SetAllBodiesBelowSimulatePhysics(WeaponMesh->GetBoneName(0), false);*/
+	
+	InteractionHelper->SetCollisionResponseToAllChannels(ECR_Ignore);
+	WidgetSwitcherOverlap->SetCollisionResponseToAllChannels(ECR_Ignore);
+	
 }
 

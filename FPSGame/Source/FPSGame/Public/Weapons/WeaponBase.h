@@ -1,9 +1,7 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
-//#include "GameFramework/Actor.h"
 #include "InteractionSystem/BaseInteractionActor.h"
 #include "WeaponBase.generated.h"
 
@@ -15,7 +13,7 @@ enum class EWeaponType : uint8
 UENUM(BlueprintType)
 enum class EWeaponSlotType: uint8
 {
-	Melee,Primary,Secondary,Throwable
+	Unarmed,Melee,Primary,Secondary,Throwable
 };
 
 UCLASS()
@@ -31,6 +29,7 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Components")
 	USkeletalMeshComponent* WeaponMesh;
+
 
 #pragma endregion
 #pragma region Overrides
