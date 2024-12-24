@@ -36,9 +36,11 @@ AMyCharacter::AMyCharacter()
 	CurrentHealth = MaxHealth;
 
 	WeaponComponent = CreateDefaultSubobject<UWeaponComponent>("Weapon Component");
+
+	
+	
 }
 
-#pragma region OverridenFunctions
 
 void AMyCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
@@ -55,6 +57,7 @@ void AMyCharacter::BeginPlay()
 	{
 		WeaponComponent->OwningPlayer = this;
 	}
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 }
 
 void AMyCharacter::Tick(float DeltaTime)
@@ -78,27 +81,55 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	}
 	MyInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 
+	// Movement
 	MyInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::HandleMove);
 	MyInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ThisClass::HandleLook);
+
 	
+	// Fire
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ThisClass::ServerStartFire);
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &ThisClass::ServerStopFire);
 	MyInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ThisClass::HandleJump);
 	
-	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Started, this, &ThisClass::HandleAds);
-	MyInputComponent->BindAction(ADSAction, ETriggerEvent::Completed, this, &ThisClass::HandleAds);
+
+	// ADS
+	MyInputComponent->BindAction(AdsAction, ETriggerEvent::Started, this, &ThisClass::HandleAds);
+	MyInputComponent->BindAction(AdsAction, ETriggerEvent::Completed, this, &ThisClass::HandleAds);
 	
+
+	// Interact
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ThisClass::HandleStartInteract);
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Completed, this, &ThisClass::HandleStopInteract);
 
+	
+	// Crouching
+	MyInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &ThisClass::Server_StartSprint);
+	MyInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &ThisClass::StopSprint);
+
+	
+	// Sprinting
+	MyInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &ThisClass::Server_StartCrouch);
+	MyInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &ThisClass::Server_StopCrouch);
+	
+
+	// Weapon Switching ->
+
+	// Primary 
 	MyInputComponent->BindAction(PrimaryWeaponAction, ETriggerEvent::Started, this, &ThisClass::ServerSwitchToPrimary);
 
+	// Secondary 
 	MyInputComponent->BindAction(SecondaryWeaponAction, ETriggerEvent::Started, this, &ThisClass::ServerSwitchToSecondary);
 
+	// Melee
 	MyInputComponent->BindAction(MeleeWeaponAction, ETriggerEvent::Started, this, &ThisClass::ServerSwitchToMelee);
 
+
+	// Throwable
 	MyInputComponent->BindAction(ThrowableWeaponAction, ETriggerEvent::Started, this, &ThisClass::SwitchToThrowableWeapon);
 
+
+	
+	// Drop Weapon
 	MyInputComponent->BindAction(DropWeaponAction, ETriggerEvent::Started, this, &ThisClass::Server_DropCurrentWeapon);
 }
 
@@ -115,7 +146,6 @@ float AMyCharacter::TakeDamage(float DamageTaken, FDamageEvent const& DamageEven
 }
 
 
-#pragma endregion
 
 void AMyCharacter::OnRep_CurrentHealth()
 {
@@ -254,6 +284,54 @@ void AMyCharacter::SwitchToThrowableWeapon()
 	// Master, please add my logic!
 }
 
+
+
+void AMyCharacter::Server_StartCrouch_Implementation()
+{
+	StartCrouch();
+}
+
+void AMyCharacter::StartCrouch_Implementation()
+{
+	bIsCrouching = true;
+	SetMovementSpeed(CrouchSpeed);
+}
+
+void AMyCharacter::Server_StopCrouch_Implementation()
+{
+	StopCrouch();
+	
+}
+
+void AMyCharacter::StopCrouch_Implementation()
+{
+	bIsCrouching = false;
+	SetMovementSpeed(WalkSpeed);
+}
+void AMyCharacter::Server_StartSprint_Implementation()
+{
+	StartSprint();
+}
+
+void AMyCharacter::StartSprint_Implementation()
+{
+	bIsSprinting = true;
+	SetMovementSpeed(SprintSpeed);
+}
+
+void AMyCharacter::Server_StopSprint_Implementation()
+{
+	StopSprint();
+}
+
+void AMyCharacter::StopSprint_Implementation()
+{
+	bIsSprinting = false;
+	SetMovementSpeed(WalkSpeed);
+}
+
+
+
 void AMyCharacter::Server_DropCurrentWeapon_Implementation()
 {
 	WeaponComponent->ThrowWeaponFromSlot(WeaponComponent->GetEquippedSlot());
@@ -334,10 +412,13 @@ void AMyCharacter::HandleHitReact_Implementation()
 }
 
 
-
+void AMyCharacter::SetMovementSpeed(float NewSpeed)
+{
+	GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+}
 
 FHitResult AMyCharacter::DoLineTraceByObject(FVector Start, FVector End, bool ShowDebug, bool ForDuration,
-											 float Duration)
+                                             float Duration)
 {
 	EDrawDebugTrace::Type DebugType = EDrawDebugTrace::None;
 	if (ShowDebug)

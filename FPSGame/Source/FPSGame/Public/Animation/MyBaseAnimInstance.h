@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/BaseAnimInstance.h"
+#include "DataClasses/EnumTypes.h"
 #include "MyBaseAnimInstance.generated.h"
 
 class AMyCharacter;
@@ -14,10 +15,13 @@ class FPSGAME_API UMyBaseAnimInstance : public UBaseAnimInstance
 	GENERATED_BODY()
 
 protected:
+	
 	virtual void NativeInitializeAnimation() override;
+	
 	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
+	
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-#pragma region BlueprintVariables
+
 	
 	UPROPERTY(BlueprintReadOnly,Category = "Animation|Player")
 	AMyCharacter* PlayerOwningCharacter;
@@ -31,24 +35,40 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
 	float SpineRotationFactor = 3.f;
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
-	bool bIsPlayerADS = false;
+
 	
 	UPROPERTY(Replicated,BlueprintReadOnly, Category = "Animation|Player")
 	FTransform LHIKTransform;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
 	FRotator SwayRotation;
+
+
+	// Animation Type
+
+	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
+	EWeaponSlotType WeaponSlot = EWeaponSlotType::Unarmed;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
+	float TurnRate;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
+	bool bIsADS = false;
 	
-#pragma endregion
+	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
+	bool bIsCrouching = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Animation|Player")
+	bool bIsSprinting = false;
+
+
+
 	
-#pragma region OtherVariables
 	
 	float MoveSway;
 	float MouseXSway;
 	float MouseYSway;
 	
-#pragma endregion
 
 	/*UFUNCTION()
 	void OnRep_SpineRotation();*/

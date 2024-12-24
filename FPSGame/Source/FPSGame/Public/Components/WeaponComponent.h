@@ -124,9 +124,12 @@ protected:
 	UPROPERTY(BlueprintReadOnly,Category = "Weapon|Trace")
 	FHitResult OutHit;
 
+public:
+	
 	UPROPERTY(BlueprintReadOnly,Category = "Weapon|Input")
 	bool bIsAds = false;
-	
+
+protected:
 
 	UPROPERTY(BlueprintReadOnly,Category = "Weapon|Firing")
 	FRotator PreRecoilRotation;

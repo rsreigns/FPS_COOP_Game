@@ -5,6 +5,7 @@
 #include "Character/MyCharacter.h"
 #include "Net/UnrealNetwork.h"
 #include "KismetAnimationLibrary.h"
+#include "Components/WeaponComponent.h"
 
 void UMyBaseAnimInstance::NativeInitializeAnimation()
 {
@@ -22,7 +23,6 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 	{
 		MovementDirection = UKismetAnimationLibrary::CalculateDirection(CharVelocity, OwningCharacter->GetActorRotation());
 		
-		bIsPlayerADS = PlayerOwningCharacter->bIsADS;
 		
 		Server_UpdateSpineRotation();
 		
@@ -48,6 +48,21 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 			FVector2D(-10,10),MouseYSway);
 
 		SwayRotation.Roll = FMath::FInterpTo(SwayRotation.Roll,MouseY,DeltaSeconds,5.0f);
+
+
+		// Animation states
+
+		bIsCrouching = PlayerOwningCharacter->bIsCrouching;
+
+		bIsSprinting = PlayerOwningCharacter->bIsSprinting;
+		
+		bIsADS = PlayerOwningCharacter->GetWeaponComponent()->bIsAds;
+
+		WeaponSlot = PlayerOwningCharacter->GetWeaponComponent()->GetEquippedSlot();
+
+		TurnRate = PlayerOwningCharacter->MouseSwayX;
+
+
 	}
 
 }

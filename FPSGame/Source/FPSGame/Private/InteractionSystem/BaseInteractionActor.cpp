@@ -56,7 +56,7 @@ void ABaseInteractionActor::PlayerPressedInteract(APawn* PlayerPawn)
 		{
 			/*if (AMyCharacter* MyCharacter = Cast<AMyCharacter>(PlayerPawn))
 			{
-				/*MyCharacter->EquipWeapon(WeaponClass);
+				MyCharacter->EquipWeapon(WeaponClass);
 				Destroy();#1#
 			}*/
 		}

@@ -94,7 +94,13 @@ protected:
 	const UInputAction* JumpAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
-	const UInputAction* ADSAction;
+	const UInputAction* AdsAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
+	const UInputAction* CrouchAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
+	const UInputAction* SprintAction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player|Input|Actions")
 	const UInputAction* InteractAction;
@@ -157,7 +163,26 @@ protected:
 	
 	FViewTargetTransitionParams TransitionParams;
 
+
 	
+
+	/* ------------------>  Locomotion <----------------------*/
+
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Montages")
+	float WalkSpeed = 250.f;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Montages")
+	float SprintSpeed = 600.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Player|Montages")
+	float CrouchSpeed = 120.f;
+
+
+
+
+
+
 	
 
 	/* ------------------>  Weapons <----------------------*/
@@ -168,7 +193,7 @@ protected:
 	void OnRep_CurrentHealth();
 
 	void OnHealthUpdate();
-#pragma region InputFunctions
+
 	
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	void HandleMove(const FInputActionValue& Value);
@@ -217,9 +242,33 @@ protected:
 	UFUNCTION(Server, Unreliable, Category = "Gameplay")
 	void Server_DropCurrentWeapon();
 
-#pragma endregion
+	UFUNCTION(Server, Unreliable, Category = "Gameplay")
+	void Server_StartCrouch();
+
+	UFUNCTION(NetMulticast, Unreliable, Category = "Gameplay")
+	void StartCrouch();
+
+	UFUNCTION(Server, Unreliable, Category = "Gameplay")
+	void Server_StopCrouch();
 	
-#pragma region CustomFunctions
+	UFUNCTION(NetMulticast, Unreliable, Category = "Gameplay")
+	void StopCrouch();
+
+	UFUNCTION(Server, Unreliable, Category = "Gameplay")
+	void Server_StartSprint();
+
+	UFUNCTION(NetMulticast, Unreliable, Category = "Gameplay")
+	void StartSprint();
+
+	UFUNCTION(Server, Unreliable, Category = "Gameplay")
+	void Server_StopSprint();
+	
+	UFUNCTION(NetMulticast, Unreliable, Category = "Gameplay")
+	void StopSprint();
+
+
+	void SetMovementSpeed(float NewSpeed);
+
 	FHitResult DoLineTraceByObject(FVector Start, FVector End, bool ShowDebug=false, bool ForDuration=false,float Duration=2.f);
 	
 	bool DoSphereTraceByObject(FHitResult& InHit,FVector Start, FVector End,float TraceRadius = 5.f, bool ShowDebug = false, bool ForDuration = false, float Duration = 2.f);
@@ -251,7 +300,7 @@ public:
 	FTransform GetLhikTransform();
 
 
-#pragma endregion
+
 
 
 	UFUNCTION(Server,Unreliable)
@@ -264,15 +313,19 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	FRotator DeltaRotation = FRotator::ZeroRotator;
 
+	// Animation Specific
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsCrouching;
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsSprinting;
+
 	UPROPERTY(BlueprintReadOnly)
 	float MovementSway;
 	UPROPERTY(BlueprintReadOnly)
 	float MouseSwayX;
 	UPROPERTY(BlueprintReadOnly)
 	float MouseSwayY;
-	
-	UPROPERTY(BlueprintReadOnly)
-	bool bIsADS=false;
 
 	UPROPERTY(BlueprintReadOnly)
 	AActor* InteractingActor;
