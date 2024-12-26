@@ -172,10 +172,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Montages")
 	float WalkSpeed = 250.f;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Player|Montages")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Montages")
 	float SprintSpeed = 600.f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Player|Montages")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Montages")
 	float CrouchSpeed = 120.f;
 
 

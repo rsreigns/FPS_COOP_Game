@@ -63,6 +63,8 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 		TurnRate = PlayerOwningCharacter->MouseSwayX;
 
 
+
+
 	}
 
 }

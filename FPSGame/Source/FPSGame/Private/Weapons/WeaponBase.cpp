@@ -48,7 +48,14 @@ void AWeaponBase::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
+	UpdateWeapon();
 
+
+	
+}
+
+void AWeaponBase::UpdateWeapon()
+{
 	if (CachedDataTable)
 	{
 		const FWeaponData* Row = CachedDataTable->FindRow<FWeaponData>(*RowName, TEXT("GetRowByName"), true);
@@ -66,7 +73,6 @@ void AWeaponBase::OnConstruction(const FTransform& Transform)
 			WeaponMesh->SetSkeletalMeshAsset(WeaponInfo.WeaponMesh);
 		}
 	}
-	
 }
 
 
@@ -74,7 +80,7 @@ void AWeaponBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	
+	UpdateWeapon();
 }
 
 

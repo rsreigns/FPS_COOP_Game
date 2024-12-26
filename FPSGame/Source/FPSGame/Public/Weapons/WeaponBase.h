@@ -50,6 +50,9 @@ public:
 	UFUNCTION(BlueprintPure,BlueprintCallable, Category = "Weapons")
 	FORCEINLINE USkeletalMeshComponent* GetWeaponMesh() const { return WeaponMesh;}
 
+	UFUNCTION(CallInEditor,BlueprintCallable)
+	void UpdateWeapon();
+
 
 	
 	
