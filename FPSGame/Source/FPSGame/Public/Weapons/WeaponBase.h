@@ -29,11 +29,11 @@ public:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Components")
 	USkeletalMeshComponent* WeaponMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Weapon")
+	UPROPERTY(BlueprintReadOnly,Category = "Weapon")
 	FWeaponInfo WeaponInfo;
 
 
-	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = "DataTable")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Default")
 	FString RowName;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "DataTable")

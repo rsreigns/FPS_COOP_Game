@@ -9,6 +9,7 @@
 #include "DataClasses/StructTypesClass.h"
 #include "MyCharacter.generated.h"
 
+struct FInputActionValue;
 class UWeaponComponent;
 class UCameraComponent;
 class USpringArmComponent;
@@ -30,11 +31,14 @@ public:
 
 	AMyCharacter();
 
-#pragma region Overriden functions
+
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
 	virtual void BeginPlay() override;
+	
 	virtual void Tick(float DeltaTime) override;
+	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 
@@ -42,14 +46,13 @@ public:
 	virtual float TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 
-#pragma endregion
-
 protected:
-#pragma region Components
+
 	
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Components")
 	USpringArmComponent* SpringArm;
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	UCameraComponent* CameraComponent;
 
@@ -59,9 +62,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components")
 	UEnhancedInputComponent* MyInputComponent;
 
-#pragma endregion
 
-#pragma region Properties
 
 	UPROPERTY()
 	APlayerController* MyController;
@@ -71,6 +72,36 @@ protected:
 
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentHealth )
 	float CurrentHealth;
+
+
+	/* ------------------>  Animation Data <----------------------*/
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Animation")
+	TSubclassOf<UAnimInstance> UnarmedLocomotionClass;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Animation")
+	TSubclassOf<UAnimInstance> PrimaryWeaponLocomotionClass;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Animation")
+	TSubclassOf<UAnimInstance> SecondaryWeaponLocomotionClass;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Animation")
+	TSubclassOf<UAnimInstance> MeleeWeaponLocomotionClass;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Animation")
+	TSubclassOf<UAnimInstance> ThrowableWeaponLocomotionClass;
+
+
+	
+	void InitializeUnarmedLayer() const;
+
+	void ChangeAnimLayer(TSubclassOf<UAnimInstance> TempAnimLayer) const;
+	
+	UFUNCTION(Server, Unreliable)
+	void Svr_ChangeAnimLayer(TSubclassOf<UAnimInstance> TempAnimLayer) const;
+
+	UFUNCTION(NetMulticast, Unreliable)
+	void MC_ChangeAnimLayer(TSubclassOf<UAnimInstance> TempAnimLayer) const;
 
 	
 
@@ -128,8 +159,7 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Player|Interaction")
 	TArray <TEnumAsByte <EObjectTypeQuery>> TraceObjectTypes;
-
-
+	
 	UPROPERTY(EditDefaultsOnly,Category="Player|Weapon")
 	TSubclassOf<AWeaponBase> WeaponToSpawn;
 	
@@ -169,13 +199,13 @@ protected:
 	/* ------------------>  Locomotion <----------------------*/
 
 
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Montages")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Locomotion")
 	float WalkSpeed = 250.f;
 	
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Montages")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Locomotion")
 	float SprintSpeed = 600.f;
 
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Montages")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Player|Locomotion")
 	float CrouchSpeed = 120.f;
 
 
@@ -190,9 +220,9 @@ protected:
 	
 
 	UFUNCTION()
-	void OnRep_CurrentHealth();
+	void OnRep_CurrentHealth() const;
 
-	void OnHealthUpdate();
+	void OnHealthUpdate() const;
 
 	
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
@@ -204,15 +234,11 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	void HandleJump();
 
-	UFUNCTION(Server,Reliable,Category="Gameplay")
+	UFUNCTION(Server,Unreliable,Category="Gameplay")
 	void ServerStartFire();
-	UFUNCTION(NetMulticast,Reliable, Category="Gameplay")
-	void StartFire();
 
-	UFUNCTION(Server,Reliable,Category="Gameplay")
+	UFUNCTION(Server,Unreliable,Category="Gameplay")
 	void ServerStopFire();
-	UFUNCTION(NetMulticast,Reliable, Category = "Gameplay")
-	void StopFire();
 
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	void HandleAds();
@@ -323,9 +349,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	float MovementSway;
 	UPROPERTY(BlueprintReadOnly)
-	float MouseSwayX;
+	float MouseX;
 	UPROPERTY(BlueprintReadOnly)
-	float MouseSwayY;
+	float MouseY;
 
 	UPROPERTY(BlueprintReadOnly)
 	AActor* InteractingActor;

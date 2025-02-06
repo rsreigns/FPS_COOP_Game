@@ -26,9 +26,9 @@ public:
 	
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Components")
-	class UBoxComponent* BoxOverlap;
+	UBoxComponent* BoxOverlap;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category="MeleeBase")
+	UPROPERTY(BlueprintReadOnly,Category="MeleeBase")
 	FMeleeInfo MeleeInfo;
 	
 

@@ -65,17 +65,31 @@ void UWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UWeaponComponent::StartFireEvent_Implementation()
 {
-	if (!OwningPlayer || !EquippedWeapon || GetIsReloading())
+	if (!OwningPlayer || !EquippedWeapon )
 	{
 		return;
 	}
-	PreRecoilRotation = OwningPlayer->GetControlRotation();
+	
+	if ( EquippedWeaponType == EWeaponType::Firearm)
+	{
+		if ( GetIsReloading() )
+		{
+			return;
+		}
+		
+		PreRecoilRotation = OwningPlayer->GetControlRotation();
 
-	FirstFireDelay = FMath::Max(LastFiredTime + FirearmInfo.FireRate - GetWorld()->TimeSeconds, 0.f);
+		FirstFireDelay = FMath::Max(LastFiredTime + FirearmInfo.FireRate - GetWorld()->TimeSeconds, 0.f);
 
-	const bool bShouldLoop = FirearmInfo.WeaponFiringMode == EWeaponFiringMode::Automatic ? true : false;
-	BulletsFired = 0;
-	GetWorld()->GetTimerManager().SetTimer(FireTimerHandle, this, &ThisClass::HandleFire,FirearmInfo.FireRate, bShouldLoop, FirstFireDelay);
+		const bool bShouldLoop = FirearmInfo.WeaponFiringMode == EWeaponFiringMode::Automatic ? true : false;
+		BulletsFired = 0;
+		GetWorld()->GetTimerManager().SetTimer(FireTimerHandle, this, &ThisClass::HandleFire,FirearmInfo.FireRate, bShouldLoop, FirstFireDelay);
+	}
+
+	else if ( EquippedWeaponType == EWeaponType::Melee)
+	{
+		OwningPlayer->PlayMontageOnCharacter(MeleeInfo.HeavyAttackMontage,true);
+	}
 }
 
 void UWeaponComponent::StopFireEvent_Implementation()
@@ -199,14 +213,14 @@ void UWeaponComponent::HandleHitDetection_Implementation()
 
 void UWeaponComponent::WeaponEffects_Implementation()
 {
-	const FImpactEffects TempImpactEffects = GetImpactEffects();
-	if (TempImpactEffects.ImpactSound)
+	const auto [ImpactSound, ImpactParticle] = GetImpactEffects();
+	if (ImpactSound)
 	{
-		UGameplayStatics::SpawnSoundAtLocation(this, TempImpactEffects.ImpactSound, OutHit.ImpactPoint);
+		UGameplayStatics::SpawnSoundAtLocation(this, ImpactSound, OutHit.ImpactPoint);
 	}
-	if (TempImpactEffects.ImpactParticle)
+	if (ImpactParticle)
 	{
-		UGameplayStatics::SpawnEmitterAtLocation(this, TempImpactEffects.ImpactParticle, OutHit.ImpactPoint,OutHit.ImpactNormal.Rotation() );
+		UGameplayStatics::SpawnEmitterAtLocation(this, ImpactParticle, OutHit.ImpactPoint,OutHit.ImpactNormal.Rotation() );
 	}
 	if (WeaponInfo.HitSound)
 	{
@@ -222,17 +236,25 @@ void UWeaponComponent::WeaponEffects_Implementation()
 void UWeaponComponent::HandleRecoil_Implementation()
 {
 	BulletsFired += 1;
-	float InYaw = FMath::RandRange(FirearmInfo.RecoilYaw.X, FirearmInfo.RecoilYaw.Y);
-	float InPitch = FMath::RandRange(FirearmInfo.RecoilPitch.X, FirearmInfo.RecoilPitch.Y)
+	const float InYaw = FMath::RandRange(FirearmInfo.RecoilYaw.X, FirearmInfo.RecoilYaw.Y);
+	const float InPitch = FMath::RandRange(FirearmInfo.RecoilPitch.X, FirearmInfo.RecoilPitch.Y)
 		* FMath::GetMappedRangeValueClamped(FVector2D(0, FirearmInfo.MaxAmmo - CurrentAmmo), FVector2D(0, FirearmInfo.MaxPitchMultiplier), BulletsFired);
-
+	
+	//const FRotator TempControlRot = OwningPlayer->GetControlRotation();
+	//const FRotator TempRecoilAddedRot = FRotator(TempControlRot.Pitch - InPitch, TempControlRot.Yaw + InYaw, TempControlRot.Roll);
+	//const FRotator TempNewRot = FMath::RInterpTo(TempControlRot, TempRecoilAddedRot, GetWorld()->GetDeltaSeconds(),RecoilSmoothness);
+	//OwningPlayer->GetController()->SetControlRotation(TempNewRot);
 	OwningPlayer->AddControllerYawInput(InYaw);
 	OwningPlayer->AddControllerPitchInput(-InPitch);
+	/*if ( FirearmInfo.FireCameraShake && OwningPlayer && OwningPlayer->GetController())
+	{
+		Cast<APlayerController>(OwningPlayer->GetController())->ClientStartCameraShake(FirearmInfo.FireCameraShake, 1);
+	}*/
 }
 
 void UWeaponComponent::HandleAds()
 {
-	if ( !EquippedWeapon || !EquippedWeapon->GetWeaponMesh() )
+	if ( !PlayerCamera )
 	{
 		return;
 	}
@@ -241,26 +263,23 @@ void UWeaponComponent::HandleAds()
 		OwningPlayer->PlayMontageOnCharacter(MeleeInfo.HeavyAttackMontage);
 		return;
 	}
+	
+	if ( bIsAds )
+	{
+		PlayerCamera->AttachToComponent(OwningPlayer->GetSpringArmComponent(),FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true));
+		bIsAds = false;
+		return;
+	}
+	
+	if ( !EquippedWeapon || !EquippedWeapon->GetWeaponMesh() )
+	{
+		return;
+	}
+
 	if ( EquippedWeapon )
 	{
-		if ( bIsAds )
-		{
-			if ( PlayerCamera )
-			{
-				PlayerCamera->AttachToComponent(OwningPlayer->GetSpringArmComponent(),FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true));
-				bIsAds = false;
-				return;
-			}
-		}
-		else
-		{
-			if ( PlayerCamera )
-			{
-				PlayerCamera->AttachToComponent(EquippedWeapon->GetWeaponMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true),"ADS");
-				bIsAds = true;
-				return;
-			}
-		}
+		PlayerCamera->AttachToComponent(EquippedWeapon->GetWeaponMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true),"ADS");
+		bIsAds = true;
 	}
 }
 
@@ -556,7 +575,7 @@ AWeaponBase* UWeaponComponent::GetWeaponFromSlotType(EWeaponSlotType WeaponSlot)
 	}
 }
 
-FName UWeaponComponent::GetSocketNameForWeapon(EWeaponSlotType WeaponSlot, bool bNeedRestSocket)
+FName UWeaponComponent::GetSocketNameForWeapon(const EWeaponSlotType WeaponSlot, const bool bNeedRestSocket)
 {
 	switch (WeaponSlot)
 	{

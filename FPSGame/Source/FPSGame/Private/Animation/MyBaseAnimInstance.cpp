@@ -31,8 +31,8 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 
 		// Weapon Sway calculation
 		MoveSway = PlayerOwningCharacter->MovementSway;
-		MouseXSway = PlayerOwningCharacter->MouseSwayX;
-		MouseYSway = PlayerOwningCharacter->MouseSwayY;
+		MouseXSway = PlayerOwningCharacter->MouseX;
+		MouseYSway = PlayerOwningCharacter->MouseY;
 
 		float MovingSway = FMath::GetMappedRangeValueClamped(FVector2D(-1,1),
 			FVector2D(-10,10),MoveSway);
@@ -60,7 +60,7 @@ void UMyBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 
 		WeaponSlot = PlayerOwningCharacter->GetWeaponComponent()->GetEquippedSlot();
 
-		TurnRate = PlayerOwningCharacter->MouseSwayX;
+		TurnRate = PlayerOwningCharacter->MouseX;
 
 
 

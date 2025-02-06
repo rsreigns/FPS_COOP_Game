@@ -15,14 +15,21 @@ class FPSGAME_API UBaseAnimInstance : public UAnimInstance
 	GENERATED_BODY()
 
 protected:
+	
 	virtual void NativeInitializeAnimation() override;
+	
 	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
+
+	
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Locomotion")
 	FVector CharVelocity;
 
 	UPROPERTY(BlueprintReadOnly,Category="Animation|Locomotion")
-	float GroundSpeed;
+	float GroundSpeed3D;
+
+	UPROPERTY(BlueprintReadOnly,Category="Animation|Locomotion")
+	float GroundSpeed2D;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Locomotion")
 	float ZVelocity;
@@ -36,8 +43,11 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Character")
 	ABaseCharacter* OwningCharacter;
+	
 	UPROPERTY(BlueprintReadOnly, Category = "Animation|Character")
 	UCharacterMovementComponent* OwningCharacterMovement;
+
+	float CalculateMovementSpeed3D();
 
 
 	

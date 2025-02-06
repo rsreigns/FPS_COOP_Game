@@ -2,6 +2,8 @@
 
 
 #include "Animation/BaseAnimInstance.h"
+
+#include "ObjectTools.h"
 #include "Character/BaseCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -15,15 +17,33 @@ void UBaseAnimInstance::NativeInitializeAnimation()
 	}
 }
 
-void UBaseAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
+void UBaseAnimInstance::NativeThreadSafeUpdateAnimation(const float DeltaSeconds)
 {
 	Super::NativeThreadSafeUpdateAnimation(DeltaSeconds);
+	
 	if (OwningCharacterMovement && OwningCharacter)
 	{
+		
 		CharVelocity = OwningCharacter->GetVelocity();
+		
 		bIsFalling = OwningCharacterMovement->IsFalling();
-		GroundSpeed = OwningCharacter->GetVelocity().Size2D();
-		bIsMoving = GroundSpeed > 0.0f;
+		
+		GroundSpeed2D = OwningCharacter->GetVelocity().Size2D();
+
+		GroundSpeed3D = CalculateMovementSpeed3D();
+		
+		bIsMoving = GroundSpeed3D > 0.0f;
+		
 		ZVelocity = OwningCharacter->GetVelocity().Z;
 	}
+}
+
+float UBaseAnimInstance::CalculateMovementSpeed3D()
+{
+	const float ForwardSpeed = FVector::DotProduct(OwningCharacter->GetActorForwardVector(),CharVelocity);
+	
+	const float RightSpeed = FVector::DotProduct(OwningCharacter->GetActorRightVector(),CharVelocity);
+	
+	
+	return FMath::Sqrt(FMath::Square(ForwardSpeed) + FMath::Square(RightSpeed));
 }

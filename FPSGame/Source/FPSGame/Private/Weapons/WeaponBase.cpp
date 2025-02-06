@@ -31,7 +31,7 @@ AWeaponBase::AWeaponBase()
 		WeaponMesh->SetSkeletalMesh(WeaponInfo.WeaponMesh);
 	}
 	
-	static ConstructorHelpers::FObjectFinder<UDataTable> DataTableFinder(TEXT("/Game/MyFiles/Data/DT_WeaponBase.DT_WeaponBase"));
+	static ConstructorHelpers::FObjectFinder<UDataTable> DataTableFinder(TEXT("/Game/MyFiles/WeaponSystem/Data/DT_WeaponBase.DT_WeaponBase"));
 	if (DataTableFinder.Succeeded())
 	{
 		CachedDataTable = DataTableFinder.Object;

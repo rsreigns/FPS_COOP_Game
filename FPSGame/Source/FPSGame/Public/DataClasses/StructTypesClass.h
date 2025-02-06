@@ -153,6 +153,9 @@ struct FFirearmInfo : public FTableRowBase
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	float MaxPitchMultiplier = 1.5;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Weapon|Handle")
+	TSubclassOf<UCameraShakeBase> FireCameraShake;
+
 	
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Effects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

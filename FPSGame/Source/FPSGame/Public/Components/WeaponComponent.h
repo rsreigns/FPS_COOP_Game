@@ -72,8 +72,10 @@ protected:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Weapon|Handle")
 	float WeaponThrowForce = 500.f;
 
-	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Weapon|Recoil")
+	float RecoilSmoothness = 1.f;
 
+	
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Read-Only Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 public:

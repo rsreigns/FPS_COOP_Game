@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Components/WeaponComponent.h"
+#include "Controller/FPS_PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Weapons/WeaponBase.h"
@@ -58,15 +59,20 @@ void AMyCharacter::BeginPlay()
 		WeaponComponent->OwningPlayer = this;
 	}
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+
+	FTimerHandle TempTimerHandle;
+	GetWorldTimerManager().SetTimer(TempTimerHandle, this, &AMyCharacter::InitializeUnarmedLayer,3.f);
 }
 
-void AMyCharacter::Tick(float DeltaTime)
+void AMyCharacter::Tick(const float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (CameraComponent)
+	/*if (CameraComponent)
 	{
 		DeltaRotation = CameraComponent->GetComponentRotation();
 	}
+	const FRotator TempSpringArmRotation = GetSpringArmComponent()->GetRelativeRotation();
+	CameraComponent->SetRelativeRotation(FRotator(TempSpringArmRotation.Pitch + MouseY, TempSpringArmRotation.Yaw + MouseX, 0));*/
 }
 
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -89,6 +95,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// Fire
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ThisClass::ServerStartFire);
 	MyInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &ThisClass::ServerStopFire);
+
+	// Jump
 	MyInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ThisClass::HandleJump);
 	
 
@@ -102,7 +110,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	MyInputComponent->BindAction(InteractAction, ETriggerEvent::Completed, this, &ThisClass::HandleStopInteract);
 
 	
-	// Crouching
+	// Sprint
 	MyInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &ThisClass::Server_StartSprint);
 	MyInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &ThisClass::StopSprint);
 
@@ -127,7 +135,6 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// Throwable
 	MyInputComponent->BindAction(ThrowableWeaponAction, ETriggerEvent::Started, this, &ThisClass::SwitchToThrowableWeapon);
 
-
 	
 	// Drop Weapon
 	MyInputComponent->BindAction(DropWeaponAction, ETriggerEvent::Started, this, &ThisClass::Server_DropCurrentWeapon);
@@ -145,15 +152,48 @@ float AMyCharacter::TakeDamage(float DamageTaken, FDamageEvent const& DamageEven
 	return NewHealth;
 }
 
+void AMyCharacter::InitializeUnarmedLayer() const
+{
+	ChangeAnimLayer(UnarmedLocomotionClass);
+}
+
+void AMyCharacter::ChangeAnimLayer(const TSubclassOf<UAnimInstance> TempAnimLayer) const
+{
+	if ( GetMesh() && GetMesh()->GetAnimInstance() && TempAnimLayer )
+	{
+		if (IsLocallyControlled())
+		{
+			if (GetLocalRole() == ROLE_Authority)
+			{
+				MC_ChangeAnimLayer(TempAnimLayer);
+			}
+			else
+			{
+				Svr_ChangeAnimLayer(TempAnimLayer);
+			}
+		}
+	}
+	
+}
+
+void AMyCharacter::Svr_ChangeAnimLayer_Implementation(const TSubclassOf<UAnimInstance> TempAnimLayer) const
+{
+	MC_ChangeAnimLayer(TempAnimLayer);
+}
+
+void AMyCharacter::MC_ChangeAnimLayer_Implementation(const TSubclassOf<UAnimInstance> TempAnimLayer) const
+{
+		GetMesh()->GetAnimInstance()->LinkAnimClassLayers(TempAnimLayer);
+}
 
 
-void AMyCharacter::OnRep_CurrentHealth()
+void AMyCharacter::OnRep_CurrentHealth() const
 {
 	OnHealthUpdate();
 }
 
 
-void AMyCharacter::OnHealthUpdate()
+void AMyCharacter::OnHealthUpdate() const
 {
 	if (IsLocallyControlled())
 	{
@@ -173,7 +213,23 @@ void AMyCharacter::OnHealthUpdate()
 void AMyCharacter::HandleMove(const FInputActionValue& Value)
 {
 	const FVector2D MovementInput = Value.Get<FVector2D>();
-	const FRotator MovementRotation(0.f, MyController->GetControlRotation().Yaw, 0.f);
+	if (const AFPS_PlayerController* TempFpsController = Cast<AFPS_PlayerController>(GetController());TempFpsController)
+	{
+		FRotator TempRelativeRot = TempFpsController->GetGravityRelativeRotation(GetControlRotation(), GetCharacterMovement()->GetGravityDirection());
+		TempRelativeRot = FRotator(0 ,TempRelativeRot.Yaw,TempRelativeRot.Roll);
+		
+		const FRotator TempWorldRotRight = TempFpsController->GetGravityWorldRotation(TempRelativeRot, GetCharacterMovement()->GetGravityDirection());
+		
+		AddMovementInput(TempWorldRotRight.RotateVector(FVector::RightVector), MovementInput.X);
+
+		TempRelativeRot = FRotator(0, TempRelativeRot.Yaw, 0);
+
+		const FRotator TempWorldRotForward = TempFpsController->GetGravityWorldRotation(TempRelativeRot, GetCharacterMovement()->GetGravityDirection());
+
+		AddMovementInput(TempWorldRotForward.RotateVector(FVector::ForwardVector), MovementInput.Y);
+	}
+	
+	/*const FRotator MovementRotation(0.f, MyController->GetControlRotation().Yaw, 0.f);
 	if (MovementInput.Y != 0)
 	{
 		const FVector ForwardDirection = MovementRotation.RotateVector(FVector::ForwardVector);
@@ -184,16 +240,23 @@ void AMyCharacter::HandleMove(const FInputActionValue& Value)
 		const FVector RightDirection = MovementRotation.RotateVector(FVector::RightVector);
 		AddMovementInput(RightDirection, MovementInput.X);
 		MovementSway = MovementInput.X;
-	}
+	}*/
 }
 
 void AMyCharacter::HandleLook(const FInputActionValue& Value)
 {
 	const FVector2D LookInput = Value.Get<FVector2D>();
+	
 	AddControllerYawInput(LookInput.X);
 	AddControllerPitchInput(LookInput.Y);
-	MouseSwayX = LookInput.X;
-	MouseSwayY = LookInput.Y;
+	
+	/*if (GetCameraComponent())
+	{
+		GetCameraComponent()->SetWorldRotation()
+	}
+	
+	MouseX = LookInput.X;
+	MouseY = LookInput.Y;*/
 }
 
 void AMyCharacter::HandleJump()
@@ -203,21 +266,10 @@ void AMyCharacter::HandleJump()
 
 void AMyCharacter::ServerStartFire_Implementation()
 {
-	StartFire();
-}
-
-void AMyCharacter::StartFire_Implementation()
-{
 	WeaponComponent->StartFireEvent();
 }
 
-
 void AMyCharacter::ServerStopFire_Implementation()
-{
-	StopFire();
-}
-
-void AMyCharacter::StopFire_Implementation()
 {
 	WeaponComponent->StopFireEvent();
 }
@@ -266,22 +318,26 @@ void AMyCharacter::HandleStopInteract()
 void AMyCharacter::ServerSwitchToPrimary_Implementation()
 {
 	WeaponComponent->SwitchWeaponSlot(EWeaponSlotType::Primary);
+	ChangeAnimLayer(PrimaryWeaponLocomotionClass);
 }
 
 void AMyCharacter::ServerSwitchToSecondary_Implementation()
 {
 	WeaponComponent->SwitchWeaponSlot(EWeaponSlotType::Secondary);
+	ChangeAnimLayer(SecondaryWeaponLocomotionClass);
 }
 
 void AMyCharacter::ServerSwitchToMelee_Implementation()
 {
 	WeaponComponent->SwitchWeaponSlot(EWeaponSlotType::Melee);
+	ChangeAnimLayer(PrimaryWeaponLocomotionClass);
 }
 
 
 void AMyCharacter::SwitchToThrowableWeapon()
 {
 	// Master, please add my logic!
+	ChangeAnimLayer(ThrowableWeaponLocomotionClass);
 }
 
 

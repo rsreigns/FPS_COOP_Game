@@ -41,7 +41,7 @@ protected:
 
 public:
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	UPROPERTY(BlueprintReadOnly, Category = "Weapon")
 	FFirearmInfo FirearmInfo;
 	
 	UPROPERTY(BlueprintReadWrite, Category = "Weapon")
